@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Sale::class, 'user_id', 'id');
     }
+
+    public function receivedStock(): HasMany
+    {
+        return $this->hasMany(StockReceiving::class, 'user_id', 'id');
+    }
 }

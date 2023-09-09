@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\StockReceivingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/productCategories', ProductCategoryController::class);
     Route::get("/receipt/{sale}/download", [SaleController::class, 'download'])->name('downloadReceipt');
     Route::resource('/sales', SaleController::class);
+    Route::resource('/stockReceiving', StockReceivingController::class);
 });
 
 require __DIR__ . '/auth.php';
