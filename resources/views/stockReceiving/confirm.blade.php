@@ -7,10 +7,10 @@
  * Time: 17:54
  */
 ?>
-<div class="modal fade" id="confirmModal_{{$sale->id}}">
+<div class="modal fade" id="confirmModal_{{$stockReceiving->id}}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{route('sales.destroy',$sale->id)}}" method="post">
+            <form action="{{route('stockReceiving.destroy',$stockReceiving->id)}}" method="post">
                 @csrf
                 @method('delete')
                 <div class="modal-header bg-primary">
@@ -22,12 +22,16 @@
                     <p>Are you sure to delete the record below? This action is permanent</p>
                     <table class="table table-responsive-sm">
                         <tr>
-                            <td>Invoice Number</td>
-                            <td>{{$sale->invoice_number}}</td>
+                            <td>Product</td>
+                            <td>{{$stockReceiving->product->name??""}}</td>
                         </tr>
                         <tr>
-                            <td>Cashier</td>
-                            <td>{{$sale->cashier->name??""}}</td>
+                            <td>Captured By</td>
+                            <td>{{$stockReceiving->capturedBy->name??""}}</td>
+                        </tr>
+                        <tr>
+                            <td>Quantity</td>
+                            <td>{{$stockReceiving->quantity}}</td>
                         </tr>
                     </table>
                 </div>

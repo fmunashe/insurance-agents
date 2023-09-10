@@ -9,64 +9,50 @@
 ?>
 @extends('layouts.app')
 @section('content')
-
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Update Product</h4>
+                <h4>Update Stock</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a href="{{route('products.index')}}">Products</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Update Product</a></li>
+                <li class="breadcrumb-item active"><a href="{{route('stockReceiving.index')}}">Received Stock</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Update Stock</a></li>
             </ol>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-xl-12 col-xxl-12 col-sm-12">
+        <div class="col-xl-12 col-xxl-12 col-sm-12" xmlns:wire="http://www.w3.org/1999/xhtml">
             <div class="card">
                 <div class="card-header bg-primary">
-                    <h5 class="card-title text-white">Basic Product Details Info</h5>
+                    <h5 class="card-title text-white">Stock Details Info</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('products.update',$product->id)}}" method="post">
-                        @method('put')
+                    <form method="post" action="{{route('stockReceiving.update',$stockReceiving->id)}}">
                         @csrf
+                        @method('put')
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" value="{{$product->name}}" class="form-control @error('name') is-invalid @enderror" name="name">
-                                    @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label class="form-label">Category</label>
-                                    <select  class="form-control @error('product_category_id') is-invalid @enderror" name="product_category_id">
-                                        @foreach($categories as $category)
-                                            <option value="{{$category->id}}" {{$product->product_category_id==$category->id?'selected':''}} >{{$category->name}}</option>
+                                    <label class="form-label">Product</label>
+                                    <select type="text" class="form-control destroyer-select" name="product_id">
+                                        <option value="">Select Product</option>
+                                        @foreach($products as $product)
+                                            <option value="{{$product->id}}" {{$product->id==$stockReceiving->product_id?'selected':''}}>{{$product->name." ".$product->description}}</option>
                                         @endforeach
                                     </select>
-                                    @error('product_category_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    @error('product_id') <span class="text-danger error">{{ $message }}</span>@enderror
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">Quantity</label>
-                                    <input type="number" value="{{$product->quantity}}" class="form-control @error('quantity') is-invalid @enderror" name="quantity">
+                                    <input type="number" value="{{$stockReceiving->quantity}}" class="form-control @error('quantity') is-invalid @enderror"
+                                           name="quantity">
                                     @error('quantity')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -76,34 +62,26 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">Price</label>
-                                    <input type="number" min="0" step="0.1" value="{{$product->price}}" class="form-control @error('price') is-invalid @enderror" name="price">
-                                    @error('price')
+                                    <label class="form-label">Receiver</label>
+                                    <input type="text" readonly value="{{auth()->user()->name}}"
+                                           class="form-control @error('user_id') is-invalid @enderror" name="user_id">
+                                    @error('user_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label class="form-label">Description</label>
-                                    <textarea  class="form-control @error('description') is-invalid @enderror" name="description">{{$product->description}}</textarea>
-                                    @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="{{route('products.index')}}" class="btn btn-danger">Cancel</a>
+                                <a href="{{route('stockReceiving.index')}}" class="btn btn-danger">Cancel</a>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
 @endsection

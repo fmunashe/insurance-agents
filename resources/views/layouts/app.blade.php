@@ -128,6 +128,7 @@
                         <li><a href="{{route('dashboard')}}">Dashboard</a></li>
                     </ul>
                 </li>
+                @if(auth()->user()->role == \App\Enum\Role::ROLES[0] || auth()->user()->role == \App\Enum\Role::ROLES[4])
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-book"></i>
                         <span class="nav-text">Products</span>
@@ -136,22 +137,31 @@
                         <li><a href="{{route('products.index')}}">Products</a></li>
                     </ul>
                 </li>
+                @endif
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-dollar"></i>
                         <span class="nav-text">Sales</span>
                     </a>
                     <ul aria-expanded="false">
+                        @if(auth()->user()->role == \App\Enum\Role::ROLES[0] || auth()->user()->role == \App\Enum\Role::ROLES[4])
                         <li><a href="{{route('sales.index')}}">Sales</a></li>
+                        @endif
+                            @if( auth()->user()->role == \App\Enum\Role::ROLES[3])
+                        <li><a href="{{route('sales.create')}}">New Sale</a></li>
+                            @endif
                     </ul>
                 </li>
+                @if(auth()->user()->role == \App\Enum\Role::ROLES[0] || auth()->user()->role == \App\Enum\Role::ROLES[4])
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-money"></i>
                         <span class="nav-text">Purchases</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="#">Purchases</a></li>
+                        <li><a href="{{route('stockReceiving.index')}}">Purchases</a></li>
                     </ul>
                 </li>
+                @endif
+                @if(auth()->user()->role == \App\Enum\Role::ROLES[0] || auth()->user()->role == \App\Enum\Role::ROLES[4])
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-users"></i>
                         <span class="nav-text">Reports</span>
@@ -160,14 +170,8 @@
                         <li><a href="{{route('customers.index')}}">Customers</a></li>
                     </ul>
                 </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-sort-numeric-asc"></i>
-                        <span class="nav-text">Stock Take</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="#">Stock Count</a></li>
-                    </ul>
-                </li>
+                @endif
+                @if(auth()->user()->role == \App\Enum\Role::ROLES[0]|| auth()->user()->role == \App\Enum\Role::ROLES[4])
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-cogs"></i>
                         <span class="nav-text">Configuration</span>
@@ -180,6 +184,7 @@
                         @endif
                     </ul>
                 </li>
+                @endif
             </ul>
         </div>
     </div>
