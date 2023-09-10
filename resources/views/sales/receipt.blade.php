@@ -148,12 +148,14 @@
                         <p>Sub Total</p>
                         <p>Currency</p>
                         <p>Rate</p>
+                        <p>Vat (15%)</p>
                         <p>Total Paid</p>
                     </div>
                     <div class="total-right w-15 float-left text-bold" align="right">
                         <p>{{number_format($sale->saleItems->sum('sub_total'),2)}}</p>
                         <p>{{$sale->currency->name??""}}</p>
                         <p>{{$sale->rate}}</p>
+                        <p>{{number_format($sale->total*0.15,2)}}</p>
                         <p>{{number_format($sale->total,2)}}</p>
                     </div>
                     <div style="clear: both;"></div>
