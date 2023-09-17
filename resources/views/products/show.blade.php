@@ -57,8 +57,12 @@
                                 <span class="mb-0">{{$product->quantity}}</span>
                             </li>
                             <li class="list-group-item d-flex px-0 justify-content-between">
-                                <strong>Price</strong>
+                                <strong>Retail Price</strong>
                                 <span class="mb-0">{{$product->price}}</span>
+                            </li>
+                            <li class="list-group-item d-flex px-0 justify-content-between">
+                                <strong>Dealer Price</strong>
+                                <span class="mb-0">{{$product->dealer_price}}</span>
                             </li>
                         </ul>
                     </div>

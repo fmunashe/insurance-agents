@@ -15,6 +15,7 @@ class CreateSale extends Component
     public $currencies;
     public $products;
     public $currencyId;
+    public $pricingType;
     public $productId;
     public $filteredCurrency;
     public $filteredProduct;
@@ -48,17 +49,21 @@ class CreateSale extends Component
         $this->calculateTotal();
     }
 
+    public function updatedPricingType($value)
+    {
+        $this->calculateTotal();
+    }
+
     public function updatedProductId($value)
     {
         if (isset($value) && $value != null) {
             $this->filteredProduct = $this->products->where('id', '=', $value)->first();
-            $this->price[$this->i] = $this->filteredProduct['price'];
+            $this->price[$this->i] = $this->pricingType == "dealer" ? $this->filteredProduct['dealer_price'] : $this->filteredProduct['price'];
             $this->availableStock[$this->i] = $this->filteredProduct['quantity'];
             $this->calculateTotal();
         } else {
             $this->resetInputFields();
         }
-
     }
 
     public function updatedQuantity($value)
@@ -101,6 +106,7 @@ class CreateSale extends Component
             'phone' => 'required',
             'email' => 'required',
             'address' => 'required',
+            'pricingType' => 'required',
         ],
             [
                 'productId.0.required' => 'Product field is required',
@@ -120,7 +126,8 @@ class CreateSale extends Component
             'user_id' => auth()->user()->id,
             'currency_id' => $this->filteredCurrency['id'],
             'rate' => $this->filteredCurrency['rate'],
-            'customer_id' => $customer->id
+            'customer_id' => $customer->id,
+            'pricing_model' => $this->pricingType
         ]);
 
         $total = 0;
@@ -180,12 +187,24 @@ class CreateSale extends Component
 
     private function resetInputFields()
     {
-        $this->reset('product',
-            'price', 'currencyId',
-            'productId', 'subTotal',
-            'quantity', 'filteredCurrency',
-            'filteredProduct', 'total', 'i',
-            'availableStock', 'fullname', 'phone', 'email', 'address');
+        $this->reset(
+            'product',
+            'price',
+            'currencyId',
+            'productId',
+            'subTotal',
+            'quantity',
+            'filteredCurrency',
+            'filteredProduct',
+            'total',
+            'i',
+            'availableStock',
+            'fullname',
+            'phone',
+            'email',
+            'address',
+            'pricingType'
+        );
     }
 
     private function deductStock($productId, $quantity)

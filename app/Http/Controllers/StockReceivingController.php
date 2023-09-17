@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStockReceivingRequest;
 use App\Http\Requests\UpdateStockReceivingRequest;
-use App\Models\Currency;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\StockReceiving;
-use Illuminate\Support\Facades\Log;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StockReceivingController extends Controller
@@ -35,13 +34,31 @@ class StockReceivingController extends Controller
      */
     public function store(StoreStockReceivingRequest $request)
     {
-
         $data = $request->all();
+        $order = Order::query()->where('order_number', '=', $data['order_number'])->first();
+        if ($order->status != "pending") {
+            Alert::toast("This order was already processed, Please check and try again or raise a new order", 'error');
+            return to_route('orders.index');
+        }
         $data['user_id'] = auth()->user()->id;
         $stock = StockReceiving::query()->create($data);
         $stock->product()->update([
             'quantity' => $stock->quantity + $stock->product->quantity
         ]);
+
+        $order = Order::query()->where('order_number', '=', $data['order_number'])->first();
+        $item = $order->orderItems()->where('product_id', $stock->product->id)->first();
+        if ($item) {
+            $item->update([
+                'received' => $item->received + $data['quantity'],
+                'outstanding' => abs(($item->outstanding - $data['quantity']))
+            ]);
+        }
+        if ($order->orderItems()->sum('outstanding') == 0) {
+            $order->update([
+                'status' => 'processed'
+            ]);
+        }
 
         Alert::toast("Product Updated Successfully", 'success');
         return to_route('stockReceiving.index');
@@ -61,7 +78,7 @@ class StockReceivingController extends Controller
     public function edit(StockReceiving $stockReceiving)
     {
         $products = Product::all();
-        return view('stockReceiving.edit', compact('stockReceiving','products'));
+        return view('stockReceiving.edit', compact('stockReceiving', 'products'));
     }
 
     /**
@@ -77,10 +94,10 @@ class StockReceivingController extends Controller
             'quantity' => $quantity
         ]);
 
-        $product = Product::query()->where('id',$stockReceiving->product_id)->first();
+        $product = Product::query()->where('id', $stockReceiving->product_id)->first();
         $stockReceiving->update($data);
         $stockReceiving->product()->update([
-             'quantity' => $data['quantity'] + $product->quantity
+            'quantity' => $data['quantity'] + $product->quantity
         ]);
         Alert::toast("Product Updated Successfully", 'success');
         return to_route('stockReceiving.index');

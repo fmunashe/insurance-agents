@@ -62,6 +62,18 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
+                                    <label class="form-label">Quantity</label>
+                                    <input type="text" value="{{$stockReceiving->order_number}}" class="form-control @error('order_number') is-invalid @enderror"
+                                           name="order_number">
+                                    @error('order_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
                                     <label class="form-label">Receiver</label>
                                     <input type="text" readonly value="{{auth()->user()->name}}"
                                            class="form-control @error('user_id') is-invalid @enderror" name="user_id">

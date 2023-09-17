@@ -6,6 +6,7 @@
  * Date: 13/7/2023
  * Time: 15:03
  */
+
 ?>
 @extends('layouts.app')
 @section('content')
@@ -41,8 +42,10 @@
                                         <th></th>
                                         <th>Cashier</th>
                                         <th>Invoice Number</th>
+                                        <th>Pricing Model</th>
                                         <th>Currency</th>
                                         <th>Total</th>
+                                        <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -52,8 +55,10 @@
                                             <td>{{$sale->id}}</td>
                                             <td>{{$sale->cashier->name??""}}</td>
                                             <td>{{$sale->invoice_number}}</td>
+                                            <td>{{$sale->pricing_model}}</td>
                                             <td>{{$sale->currency->name??""}}</td>
                                             <td>{{number_format($sale->total,2)}}</td>
+                                            <td>{{$sale->created_at}}</td>
                                             <td>
                                                 <a href="{{route('sales.show',$sale->id)}}"
                                                    class="btn btn-sm btn-success"><i

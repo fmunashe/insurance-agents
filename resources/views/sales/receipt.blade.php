@@ -19,6 +19,9 @@
     .mt-10{
         margin-top:10px;
     }
+    .mb-10{
+        margin-bottom:10px;
+    }
     .text-center{
         text-align:center !important;
     }
@@ -35,8 +38,8 @@
         width:35%;
     }
     .logo img{
-        width:200px;
-        height:60px;
+        width:350px;
+        height:150px;
     }
     .gray-color{
         color:#5D5D5D;
@@ -78,14 +81,15 @@
 </style>
 <body>
 <div class="head-title">
-    <h1 class="m-0 p-0">Invoice</h1>
+{{--    <h1 class="m-0 p-0">Invoice</h1>--}}
 </div>
 <div class="add-detail mt-10">
     <div class="w-50 float-left mt-10">
+        <h1 class="m-0 p-0">Invoice</h1>
         <p class="m-0 pt-5 text-bold w-100">Invoice Id - <span class="gray-color">#{{$sale->invoice_number}}</span></p>
         <p class="m-0 pt-5 text-bold w-100">Invoice Date - <span class="gray-color">{{\Carbon\Carbon::parse($sale->created_at)->format('d-m-Y')}}</span></p>
     </div>
-    <div class="w-50 float-left logo mt-10">
+    <div class="w-50 float-left logo mb-10">
         <img src="{{public_path('images/logo.png')}}" style="margin-left: 10px;" class="img img-fluid" alt="logo" >
     </div>
     <div style="clear: both;"></div>
@@ -102,6 +106,7 @@
                     <p>Exide Express,</p>
                     <p>Rusape</p>
                     <p>Contact:</p>
+                    <p>Address: 6</p>
                 </div>
             </td>
             <td>
@@ -119,9 +124,11 @@
     <table class="table w-100 mt-10">
         <tr>
             <th class="w-50">Payment Method</th>
+            <th class="w-50">Pricing Model</th>
         </tr>
         <tr>
             <td>Cash and Carry</td>
+            <td>{{ucfirst($sale->pricing_model)}}</td>
         </tr>
     </table>
 </div>
@@ -148,14 +155,12 @@
                         <p>Sub Total</p>
                         <p>Currency</p>
                         <p>Rate</p>
-                        <p>Vat (15%)</p>
                         <p>Total Paid</p>
                     </div>
                     <div class="total-right w-15 float-left text-bold" align="right">
                         <p>{{number_format($sale->saleItems->sum('sub_total'),2)}}</p>
                         <p>{{$sale->currency->name??""}}</p>
                         <p>{{$sale->rate}}</p>
-                        <p>{{number_format($sale->total*0.15,2)}}</p>
                         <p>{{number_format($sale->total,2)}}</p>
                     </div>
                     <div style="clear: both;"></div>
@@ -163,7 +168,17 @@
             </td>
         </tr>
     </table>
+    <p>Received in good order and condition</p>
+    <br>
+    <div class="add-detail mt-10">
+        <div class="w-50 float-left mt-10">
+            <p class="m-0 pt-5 text-bold w-100">Name:----------------------------------------------------</p>
+        </div>
+        <div class="w-50 float-left mt-10">
+            <p class="m-0 pt-5 text-bold w-100">Signature:-----------------------------------------------</p>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
 </div>
-{{--{!! QrCode::size(300)->generate($sale->invoice_number) !!}--}}
 </body>
 </html>

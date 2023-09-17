@@ -42,7 +42,8 @@
                                         <th>Category</th>
                                         <th>Name</th>
                                         <th>Description</th>
-                                        <th>Price</th>
+                                        <th>Retail Price</th>
+                                        <th>Dealer Price</th>
                                         <th>Quantity</th>
                                         <th>Action</th>
                                     </tr>
@@ -55,6 +56,7 @@
                                             <td>{{$product->name}}</td>
                                             <td>{{$product->description}}</td>
                                             <td>{{number_format($product->price,2)}}</td>
+                                            <td>{{number_format($product->dealer_price,2)}}</td>
                                             <td>{{$product->quantity}}</td>
                                             <td>
                                                 <a href="{{route('products.show',$product->id)}}"

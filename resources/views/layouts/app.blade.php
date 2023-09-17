@@ -158,6 +158,8 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{route('stockReceiving.index')}}">Purchases</a></li>
+                        <li><a href="{{route('suppliers.index')}}">Suppliers</a></li>
+                        <li><a href="{{route('orders.index')}}">Orders</a></li>
                     </ul>
                 </li>
                 @endif
@@ -168,6 +170,7 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{route('customers.index')}}">Customers</a></li>
+                        <li><a href="{{route('salesReport')}}">Sales</a></li>
                     </ul>
                 </li>
                 @endif

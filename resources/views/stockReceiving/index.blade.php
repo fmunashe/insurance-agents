@@ -43,6 +43,7 @@
                                         <th>Product</th>
                                         <th>Description</th>
                                         <th>Quantity</th>
+                                        <th>Order Number</th>
                                         <th>Received Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -55,6 +56,7 @@
                                             <td>{{$stockReceiving->product->name??""}}</td>
                                             <td>{{$stockReceiving->product->description??""}}</td>
                                             <td>{{$stockReceiving->quantity}}</td>
+                                            <td>{{$stockReceiving->order_number}}</td>
                                             <td>{{\Carbon\Carbon::make($stockReceiving->created_at)->format('d-M-Y')}}</td>
                                             <td>
                                                 <a href="{{route('stockReceiving.edit',$stockReceiving->id)}}"

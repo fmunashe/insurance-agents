@@ -3,11 +3,14 @@
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockReceivingController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +43,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('/productCategories', ProductCategoryController::class);
     Route::get("/receipt/{sale}/download", [SaleController::class, 'download'])->name('downloadReceipt');
     Route::resource('/sales', SaleController::class);
+    Route::get("/orderNote/{order}/download", [OrderController::class, 'download'])->name('downloadOrder');
+    Route::resource('/orders', OrderController::class);
     Route::resource('/stockReceiving', StockReceivingController::class);
+
+    Route::get("/reports/sales", [ReportsController::class, 'index'])->name('salesReport');
+    Route::post("/reports/generate/sales", [ReportsController::class, 'generateSalesReport'])->name(
+        'generateSalesReport'
+    );
+
+    Route::get('/suppliers/export', [SupplierController::class, 'report'])->name('suppliers.report');
+    Route::resource('/suppliers', SupplierController::class);
 });
 
 require __DIR__ . '/auth.php';

@@ -57,6 +57,10 @@
                                     <span class="mb-0">{{$sale->rate}}</span>
                                 </li>
                                 <li class="list-group-item d-flex px-0 justify-content-between">
+                                    <strong>Pricing Model</strong>
+                                    <span class="mb-0">{{ucfirst($sale->pricing_model)}}</span>
+                                </li>
+                                <li class="list-group-item d-flex px-0 justify-content-between">
                                     <strong>Total</strong>
                                     <span class="mb-0">{{number_format($sale->total,2)}}</span>
                                 </li>

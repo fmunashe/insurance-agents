@@ -27,6 +27,7 @@ class UpdateProductRequest extends FormRequest
             'description' => ['required'],
             'quantity' => ['required', 'numeric'],
             'price' => ['required','numeric'],
+            'dealer_price' => ['required','numeric'],
         ];
     }
 }

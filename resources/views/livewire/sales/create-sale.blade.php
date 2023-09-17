@@ -7,7 +7,7 @@
         <div class="card-body">
             <form>
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="form-group">
                             <label class="form-label">Cashier</label>
                             <input type="text" readonly value="{{auth()->user()->name}}"
@@ -19,7 +19,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="form-group">
                             <label class="form-label">Currency</label>
                             <select class="form-control @error('currencyId') is-invalid @enderror"
@@ -30,6 +30,22 @@
                                 @endforeach
                             </select>
                             @error('currencyId')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label class="form-label">Pricing Type</label>
+                            <select class="form-control @error('pricingType') is-invalid @enderror"
+                                    wire:model="pricingType">
+                                <option value="">Select Pricing Type</option>
+                                    <option value="retail">Retail Price</option>
+                                    <option value="dealer">Dealer Price</option>
+                            </select>
+                            @error('pricingType')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

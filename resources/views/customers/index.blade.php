@@ -50,6 +50,7 @@
                                         <tr>
                                             <td>{{$customer->id}}</td>
                                             <td>{{$customer->fullname}}</td>
+                                            <td>{{$customer->phone}}</td>
                                             <td>{{$customer->email}}</td>
                                             <td>{{$customer->address}}</td>
                                             <td>

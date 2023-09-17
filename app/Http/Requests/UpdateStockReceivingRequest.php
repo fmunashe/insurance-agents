@@ -24,7 +24,8 @@ class UpdateStockReceivingRequest extends FormRequest
         return [
             'product_id' => 'required',
             'user_id' => 'required',
-            'quantity' => 'required'
+            'quantity' => 'required',
+            'order_number' => 'required'
         ];
     }
 }
