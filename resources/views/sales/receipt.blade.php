@@ -104,9 +104,10 @@
             <td>
                 <div class="box-text">
                     <p>Exide Express,</p>
-                    <p>Rusape</p>
-                    <p>Contact:</p>
-                    <p>Address: 6</p>
+                    <p>No 6 Chimurenga Road Rusape</p>
+                    <p>Tell: (0252) 052832</p>
+                    <p>Cell: 0773 377 230</p>
+                    <p>Email: Muregisav@gmail.com</p>
                 </div>
             </td>
             <td>
