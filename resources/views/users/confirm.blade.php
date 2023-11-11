@@ -36,8 +36,8 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Yes Delete</button>
+                    <button type="button" class="btn btn-outline-success" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Yes Delete</button>
                 </div>
             </form>
         </div>

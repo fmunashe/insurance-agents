@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enum\Role;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProductRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->role == Role::ROLES[0];
     }
 
     /**
@@ -25,9 +26,7 @@ class UpdateProductRequest extends FormRequest
             'product_category_id' => ['required', 'exists:product_categories,id'],
             'name' => ['required', 'unique:products,name,' . $this->product->id],
             'description' => ['required'],
-            'quantity' => ['required', 'numeric'],
-            'price' => ['required','numeric'],
-            'dealer_price' => ['required','numeric'],
+
         ];
     }
 }

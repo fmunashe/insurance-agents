@@ -20,7 +20,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure to delete the record below? This action is permanent</p>
+                    <p>Are you sure to delete the record below? This action is permanent and all clients under this provider will be deleted as well</p>
                     <table class="table table-responsive-sm">
                         <tr>
                             <td>Name</td>

@@ -14,14 +14,14 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>All Suppliers</h4>
+                <h4>All Insurance Providers</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0);">Suppliers</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0);">All Suppliers</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0);">Insurance Providers</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0);">All Insurance Providers</a></li>
             </ol>
         </div>
     </div>
@@ -31,7 +31,7 @@
                 <div id="list-view" class="tab-pane fade active show col-lg-12">
                     <div class="card">
                         <div class="card-header bg-primary">
-                            <h4 class="card-title text-white">All Suppliers </h4>
+                            <h4 class="card-title text-white">All Providers </h4>
                            <span> <a href="{{route('suppliers.create')}}" class="btn btn-primary">+ Add new</a>
                             <a href="{{route('suppliers.report')}}" class="btn btn-primary">Export List</a>
                            </span>

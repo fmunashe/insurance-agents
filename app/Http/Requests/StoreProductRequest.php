@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enum\Role;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreProductRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->role == Role::ROLES[0];
     }
 
     /**
@@ -22,12 +23,19 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_category_id'=>['required','exists:product_categories,id'],
-            'name'=>['required','unique:products,name'],
-            'description'=>['required'],
-            'quantity'=>['required','numeric'],
-            'price'=>['required','numeric'],
-            'dealer_price'=>['required','numeric'],
+            'product_category_id' => ['required', 'exists:product_categories,id'],
+            'name' => ['required', 'unique:products,name'],
+            'description' => ['required'],
+            'sum_insured' => ['required', 'numeric'],
+            'premium' => ['required', 'numeric'],
+            'rate' => ['required', 'numeric'],
+            'policy_number' => ['required'],
+            'supplier_id' => ['required'],
+            'currency_id' => ['required'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date'],
+            'status' => ['required'],
+            'number_of_terms' => ['required'],
         ];
     }
 }

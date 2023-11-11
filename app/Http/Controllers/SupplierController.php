@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ExportSalesReport;
-use App\Exports\SuppliersExport;
+use App\Exports\InsuranceProvidersExport;
 use App\Http\Requests\StoreSupplierRequest;
 use App\Http\Requests\UpdateSupplierRequest;
 use App\Models\Supplier;
@@ -75,7 +74,8 @@ class SupplierController extends Controller
         return to_route('suppliers.index');
     }
 
-    public function report(){
-        return Excel::download(new SuppliersExport, 'SuppliersReport.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+    public function report()
+    {
+        return Excel::download(new InsuranceProvidersExport, 'InsuranceProvidersList.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

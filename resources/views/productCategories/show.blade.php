@@ -66,8 +66,9 @@
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col" class="text-nowrap">Description</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Sum Insured</th>
+                                    <th scope="col">Premium</th>
+                                    <th scope="col">Rate</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -75,8 +76,9 @@
                                     <tr>
                                         <td class="text-nowrap">{{$product->name}}</td>
                                         <td>{{$product->description}}</td>
-                                        <td>{{number_format($product->price,2)}}</td>
-                                        <td>{{$product->quantity}}</td>
+                                        <td>{{$product->sum_insured}}</td>
+                                        <td>{{$product->premium}}</td>
+                                        <td>{{$product->rate}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

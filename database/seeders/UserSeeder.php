@@ -18,12 +18,13 @@ class UserSeeder extends Seeder
     public function run()
     {
         $users = [
-            ['name' => 'Administrator', 'email' => 'admin@pos.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[0]],
-            ['name' => 'User', 'email' => 'user@pos.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[1]],
-            ['name' => 'Cashier', 'email' => 'cashier@pos.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[3]],
-            ['name' => 'Supervisor', 'email' => 'supervisor@pos.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[4]],
+            ['name' => 'Administrator', 'email' => 'admin@insurance.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[0]],
+            ['name' => 'User', 'email' => 'user@insurance.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[1]],
+            ['name' => 'Cashier', 'email' => 'cashier@insurance.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[3]],
+            ['name' => 'Supervisor', 'email' => 'supervisor@insurance.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[4]],
         ];
 
+        User::query()->delete();
         foreach ($users as $user) {
             User::query()->create($user);
         }

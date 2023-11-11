@@ -33,7 +33,8 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        Product::query()->create($request->all());
+        $product = Product::query()->create($request->all());
+        $product->insureds()->create($request->all());
         Alert::toast('New Product Successfully Created', 'success');
         return to_route('products.index');
     }

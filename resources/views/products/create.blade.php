@@ -63,9 +63,9 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">Quantity</label>
-                                    <input type="number" value="{{old('quantity')}}" class="form-control @error('quantity') is-invalid @enderror" name="quantity">
-                                    @error('quantity')
+                                    <label class="form-label">Sum Insured</label>
+                                    <input type="number" value="{{old('sum_insured')}}" class="form-control @error('sum_insured') is-invalid @enderror" name="sum_insured">
+                                    @error('sum_insured')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -74,9 +74,9 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">Retail Price</label>
-                                    <input type="number" step="0.1" min="0" value="{{old('price')}}" class="form-control @error('price') is-invalid @enderror" name="price">
-                                    @error('price')
+                                    <label class="form-label">Premium</label>
+                                    <input type="number" step="0.1" min="0" value="{{old('premium')}}" class="form-control @error('premium') is-invalid @enderror" name="premium">
+                                    @error('premium')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -85,9 +85,9 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">Dealer Price</label>
-                                    <input type="number" step="0.1" min="0" value="{{old('dealer_price')}}" class="form-control @error('dealer_price') is-invalid @enderror" name="dealer_price">
-                                    @error('dealer_price')
+                                    <label class="form-label">Rate</label>
+                                    <input type="number" step="0.1" min="0" value="{{old('rate')}}" class="form-control @error('rate') is-invalid @enderror" name="rate">
+                                    @error('rate')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

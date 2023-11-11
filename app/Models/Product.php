@@ -11,16 +11,26 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'description',
+        'product_category_id',
+        'client_id'
+    ];
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
     }
 
-    public function receivings(): HasMany
+    public function client(): BelongsTo
     {
-        return $this->hasMany(StockReceiving::class, 'product_id', 'id');
+        return $this->belongsTo(Client::class,'client_id','id');
+    }
+
+    public function insureds(): HasMany
+    {
+        return $this->hasMany(Insured::class);
     }
 
 }

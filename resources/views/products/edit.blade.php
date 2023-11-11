@@ -63,39 +63,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label class="form-label">Quantity</label>
-                                    <input type="number" value="{{$product->quantity}}" class="form-control @error('quantity') is-invalid @enderror" name="quantity">
-                                    @error('quantity')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label class="form-label">Price</label>
-                                    <input type="number" min="0" step="0.1" value="{{$product->price}}" class="form-control @error('price') is-invalid @enderror" name="price">
-                                    @error('price')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label class="form-label">Dealer Price</label>
-                                    <input type="number" step="0.1" min="0" value="{{$product->dealer_price}}" class="form-control @error('dealer_price') is-invalid @enderror" name="dealer_price">
-                                    @error('dealer_price')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">Description</label>

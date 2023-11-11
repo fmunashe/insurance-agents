@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset('css/skin.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.min.css')}}">
     <link href="{{asset('vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/jquery-steps/css/jquery.steps.css')}}" rel="stylesheet">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @livewireStyles
 </head>
@@ -129,64 +130,58 @@
                     </ul>
                 </li>
                 @if(auth()->user()->role == \App\Enum\Role::ROLES[0] || auth()->user()->role == \App\Enum\Role::ROLES[4])
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-book"></i>
-                        <span class="nav-text">Products</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{route('products.index')}}">Products</a></li>
-                    </ul>
-                </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-book"></i>
+                            <span class="nav-text">Products</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('products.index')}}">Products</a></li>
+                        </ul>
+                    </li>
                 @endif
+
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-dollar"></i>
-                        <span class="nav-text">Sales</span>
+                        <i class="la la-paypal"></i>
+                        <span class="nav-text">Clients</span>
                     </a>
                     <ul aria-expanded="false">
-                        @if(auth()->user()->role == \App\Enum\Role::ROLES[0] || auth()->user()->role == \App\Enum\Role::ROLES[4])
-                        <li><a href="{{route('sales.index')}}">Sales</a></li>
-                        @endif
-                            @if( auth()->user()->role == \App\Enum\Role::ROLES[3])
-                        <li><a href="{{route('sales.create')}}">New Sale</a></li>
-                            @endif
+                        <li><a href="{{route('clients.index')}}">Clients</a></li>
                     </ul>
                 </li>
-                @if(auth()->user()->role == \App\Enum\Role::ROLES[0] || auth()->user()->role == \App\Enum\Role::ROLES[4])
+
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-money"></i>
-                        <span class="nav-text">Purchases</span>
+                        <span class="nav-text">Insurance Providers</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{route('stockReceiving.index')}}">Purchases</a></li>
-                        <li><a href="{{route('suppliers.index')}}">Suppliers</a></li>
-                        <li><a href="{{route('orders.index')}}">Orders</a></li>
+                        <li><a href="{{route('suppliers.index')}}">Providers</a></li>
+
                     </ul>
                 </li>
-                @endif
                 @if(auth()->user()->role == \App\Enum\Role::ROLES[0] || auth()->user()->role == \App\Enum\Role::ROLES[4])
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-users"></i>
-                        <span class="nav-text">Reports</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{route('customers.index')}}">Customers</a></li>
-                        <li><a href="{{route('salesReport')}}">Sales</a></li>
-                    </ul>
-                </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-users"></i>
+                            <span class="nav-text">Reports</span>
+                        </a>
+                        <ul aria-expanded="false">
+{{--                            <li><a href="{{route('customers.index')}}">Customers</a></li>--}}
+{{--                            <li><a href="{{route('salesReport')}}">Sales</a></li>--}}
+                        </ul>
+                    </li>
                 @endif
                 @if(auth()->user()->role == \App\Enum\Role::ROLES[0]|| auth()->user()->role == \App\Enum\Role::ROLES[4])
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-cogs"></i>
-                        <span class="nav-text">Configuration</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{route('currency.index')}}">Currency</a></li>
-                        <li><a href="{{route('productCategories.index')}}">Product Categories</a></li>
-                        @if(auth()->user()->role == \App\Enum\Role::ROLES[0])
-                            <li><a href="{{route('users.index')}}">Users</a></li>
-                        @endif
-                    </ul>
-                </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-cogs"></i>
+                            <span class="nav-text">Configuration</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('currency.index')}}">Currency</a></li>
+                            <li><a href="{{route('productCategories.index')}}">Product Categories</a></li>
+                            @if(auth()->user()->role == \App\Enum\Role::ROLES[0])
+                                <li><a href="{{route('users.index')}}">Users</a></li>
+                            @endif
+                        </ul>
+                    </li>
                 @endif
             </ul>
         </div>
@@ -214,7 +209,8 @@
     ***********************************-->
     <div class="footer">
         <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="https://fmunashe.github.io/profile" target="_blank">Zihove</a> 2023</p>
+            <p>Copyright © Designed &amp; Developed by <a href="https://fmunashe.github.io/profile" target="_blank">Zihove</a> {{\Carbon\Carbon::now()->year}}
+            </p>
         </div>
     </div>
 
@@ -241,8 +237,17 @@
 <script src="{{asset('js/plugins-init/select2-init.js')}}"></script>
 @include('sweetalert::alert')
 @livewireScripts
+@livewireChartsScripts
 <!-- Datatable -->
 <script src="{{asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/plugins-init/datatables.init.js')}}"></script>
+
+<script src="{{asset('vendor/jquery-steps/build/jquery.steps.min.js')}}"></script>
+<script src="{{asset('vendor/jquery-validation/jquery.validate.min.js')}}"></script>
+<!-- Form validate init -->
+<script src="{{asset('js/plugins-init/jquery.validate-init.js')}}"></script>
+
+<!-- Form step init -->
+<script src="{{asset('js/plugins-init/jquery-steps-init.js')}}"></script>
 </body>
 </html>

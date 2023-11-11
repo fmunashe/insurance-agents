@@ -39,12 +39,10 @@
                                     <thead>
                                     <tr>
                                         <th></th>
+                                        <th>Client</th>
                                         <th>Category</th>
                                         <th>Name</th>
                                         <th>Description</th>
-                                        <th>Retail Price</th>
-                                        <th>Dealer Price</th>
-                                        <th>Quantity</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -52,12 +50,12 @@
                                     @foreach($products as $product)
                                         <tr>
                                             <td>{{$product->id}}</td>
+                                            <td>{{$product->client->name??""}}
+                                                &nbsp;{{$product->client->surname??""}}</td>
                                             <td>{{$product->category->name??""}}</td>
                                             <td>{{$product->name}}</td>
                                             <td>{{$product->description}}</td>
-                                            <td>{{number_format($product->price,2)}}</td>
-                                            <td>{{number_format($product->dealer_price,2)}}</td>
-                                            <td>{{$product->quantity}}</td>
+
                                             <td>
                                                 <a href="{{route('products.show',$product->id)}}"
                                                    class="btn btn-sm btn-success"><i
