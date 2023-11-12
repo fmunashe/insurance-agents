@@ -77,7 +77,7 @@
                     <h4 class="text-white">Insurance Details</h4>
                 </div>
                 <div class="card-body">
-                    <table class="table">
+                    <table class="table table-responsive">
                         <thead>
                         <th>Policy Number</th>
                         <th>Provider</th>
