@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ClientControllerAPI;
 use App\Http\Controllers\API\CurrencyControllerAPI;
 use App\Http\Controllers\API\V1\CallSummaryAPI;
 use Illuminate\Http\Request;
@@ -21,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('currency', [CurrencyControllerAPI::class, 'index']);
+Route::get('getClients', [ClientControllerAPI::class, 'index']);
