@@ -22,7 +22,7 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="row">
-                                    <div class="col-md-12"> <img src="{{asset('images/logo.png')}}" class="img-fluid" ></div>
+                                    <div class="col-md-6 mx-auto"> <img src="{{asset('images/logo.png')}}" class="img-fluid" ></div>
                                 </div>
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf

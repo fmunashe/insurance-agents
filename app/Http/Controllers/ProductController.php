@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\Role;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Client;
+use App\Models\Currency;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Supplier;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
@@ -15,7 +19,18 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $clients = Client::query()
+            ->where('user_id', '=', auth()->user()->id)
+            ->pluck('id')->toArray();
+
+        $products = Product::query()
+            ->whereIn('client_id', $clients)
+            ->get();
+
+        if (auth()->user()->role == Role::ROLES[0]) {
+            $products = Product::all();
+        }
+
         return view('products.index', compact('products'));
     }
 
@@ -25,7 +40,12 @@ class ProductController extends Controller
     public function create()
     {
         $categories = ProductCategory::all();
-        return view('products.create', compact('categories'));
+
+        $clients = Client::all();
+        if (auth()->user()->role != Role::ROLES[0]) {
+            $clients = Client::query()->where('user_id', '=', auth()->user()->id)->get();
+        }
+        return view('products.create', compact('categories', 'clients'));
     }
 
     /**
@@ -34,7 +54,7 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $product = Product::query()->create($request->all());
-        $product->insureds()->create($request->all());
+//        $product->insureds()->create($request->all());
         Alert::toast('New Product Successfully Created', 'success');
         return to_route('products.index');
     }
@@ -44,7 +64,13 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+        if ($product->client->user_id != auth()->user()->id && auth()->user()->role != Role::ROLES[0]) {
+            abort(403, 'Action not allowed');
+        }
+        $currencies = Currency::all();
+        $providers = Supplier::all();
+        $categories = ProductCategory::all();
+        return view('products.show', compact('product', 'currencies', 'providers', 'categories'));
     }
 
     /**
@@ -52,6 +78,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        if ($product->client->user_id != auth()->user()->id && auth()->user()->role != Role::ROLES[0]) {
+            abort(403, 'Action not allowed');
+        }
         $categories = ProductCategory::all();
         return view('products.edit', compact('product', 'categories'));
     }
@@ -71,6 +100,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        if ($product->client->user_id != auth()->user()->id && auth()->user()->role != Role::ROLES[0]) {
+            abort(403, 'Action not allowed');
+        }
         $product->delete();
         Alert::toast('Product Successfully Removed', 'success');
         return to_route('products.index');

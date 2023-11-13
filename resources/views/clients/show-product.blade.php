@@ -10,14 +10,16 @@
 <div class="modal fade" id="showProductModal_{{$product->id}}">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
+
             <div class="card">
                 <div class="card-header bg-primary">
                     <h4 class="text-white">Insurance Details</h4>
                     <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
+                <div class="table-responsive">
                 <div class="card-body">
-                    <table class="table table-responsive">
+                    <table class="table table-sm">
                         <thead>
                         <th>Policy Number</th>
                         <th>Provider</th>
@@ -55,6 +57,7 @@
 
                         </tbody>
                     </table>
+                </div>
                 </div>
             </div>
 

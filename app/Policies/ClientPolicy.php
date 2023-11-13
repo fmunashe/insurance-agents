@@ -33,7 +33,7 @@ class ClientPolicy
      */
     public function create(User $user): Response
     {
-        return $user->role == Role::ROLES[0]
+        return ($user->role == Role::ROLES[0] || $user->role == Role::ROLES[2])
             ? Response::allow()
             : Response::deny('Action not allowed.');
     }

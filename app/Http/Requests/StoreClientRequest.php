@@ -12,7 +12,7 @@ class StoreClientRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->role == Role::ROLES[0];
+        return auth()->user()->role == (Role::ROLES[0] || Role::ROLES[2]);
     }
 
     /**

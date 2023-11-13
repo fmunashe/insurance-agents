@@ -35,10 +35,11 @@
                     <form action="{{route('products.store')}}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">Name</label>
-                                    <input type="text" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" name="name">
+                                    <input type="text" value="{{old('name')}}"
+                                           class="form-control @error('name') is-invalid @enderror" name="name">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -46,12 +47,14 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">Category</label>
-                                    <select  value="{{old('product_category_id')}}" class="form-control @error('product_category_id') is-invalid @enderror" name="product_category_id">
+                                    <select value="{{old('product_category_id')}}"
+                                            class="form-control @error('product_category_id') is-invalid @enderror"
+                                            name="product_category_id">
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}" >{{$category->name}}</option>
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('product_category_id')
@@ -63,41 +66,28 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">Sum Insured</label>
-                                    <input type="number" value="{{old('sum_insured')}}" class="form-control @error('sum_insured') is-invalid @enderror" name="sum_insured">
-                                    @error('sum_insured')
+                                    <label class="form-label">Select Client</label>
+                                    <select class="form-control destroy-selector @error('client_id') is-invalid @enderror"
+                                            name="client_id">
+                                        @foreach($clients as $client)
+                                            <option value="{{$client->id}}">{{$client->name}}
+                                                &nbsp;&nbsp;{{$client->surname}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('client_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label class="form-label">Premium</label>
-                                    <input type="number" step="0.1" min="0" value="{{old('premium')}}" class="form-control @error('premium') is-invalid @enderror" name="premium">
-                                    @error('premium')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <label class="form-label">Rate</label>
-                                    <input type="number" step="0.1" min="0" value="{{old('rate')}}" class="form-control @error('rate') is-invalid @enderror" name="rate">
-                                    @error('rate')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">Description</label>
-                                    <textarea  value="{{old('description')}}" class="form-control @error('description') is-invalid @enderror" name="description"></textarea>
+                                    <textarea value="{{old('description')}}"
+                                              class="form-control @error('description') is-invalid @enderror"
+                                              name="description"></textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

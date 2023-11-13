@@ -12,5 +12,5 @@ namespace App\Enum;
  */
 class Role extends Enum
 {
-    const ROLES = ["ADMINISTRATOR", "USER", 'REPORTING','CASHIER','SUPERVISOR'];
+    const ROLES = ["ADMINISTRATOR", "USER", 'AGENT'];
 }

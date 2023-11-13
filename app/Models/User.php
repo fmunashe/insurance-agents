@@ -22,7 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'user_type',
+        'role',
     ];
 
     /**
@@ -45,13 +45,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function sales(): HasMany
-    {
-        return $this->hasMany(Sale::class, 'user_id', 'id');
-    }
 
-    public function receivedStock(): HasMany
+    public function clients(): HasMany
     {
-        return $this->hasMany(StockReceiving::class, 'user_id', 'id');
+        return $this->hasMany(Client::class, 'user_id', 'id');
     }
 }

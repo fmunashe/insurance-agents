@@ -97,9 +97,10 @@
 
                 </div>
                 <div class="card-body">
-                    <table class="table table-condensed table-responsive">
+                    <table class="table table-sm">
                         <thead>
                         <tr>
+                            <th>#</th>
                             <th>Category</th>
                             <th>Name</th>
                             <th>Description</th>
@@ -109,6 +110,7 @@
                         <tbody>
                         @foreach($client->products as $product)
                             <tr>
+                                <td>{{$product->id}}</td>
                                 <td>{{$product->category->name??""}}</td>
                                 <td>{{$product->name}}</td>
                                 <td>{{$product->description}}</td>

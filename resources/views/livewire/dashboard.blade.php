@@ -60,7 +60,7 @@
             <div class="card-body">
                 <div class="media">
     									<span class="mr-3">
-    										<i class="la la-dollar"></i>
+    										<i class="la la-print"></i>
     									</span>
                     <div class="media-body text-white">
                         <p class="mb-1">Total Product Categories</p>
@@ -69,6 +69,43 @@
                             <div class="progress-bar progress-animated bg-light" style="width: 100%"></div>
                         </div>
                         {{--                        <small>30% Increase in 30 Days</small>--}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-xxl-6 col-sm-6">
+        <div class="widget-stat card bg-blue">
+            <div class="card-body">
+                <div class="media">
+    									<span class="mr-3">
+    										<i class="la la-dollar"></i>
+    									</span>
+                    <div class="media-body text-white">
+                        <p class="mb-1">Total Premium</p>
+                        <h3 class="text-white">{{number_format($totalPremium,2)}}</h3>
+                        <div class="progress mb-2 bg-white">
+                            <div class="progress-bar progress-animated bg-light" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-xxl-6 col-sm-6">
+        <div class="widget-stat card bg-info">
+            <div class="card-body">
+                <div class="media">
+    									<span class="mr-3">
+    										<i class="la la-paper-plane"></i>
+    									</span>
+                    <div class="media-body text-white">
+                        <p class="mb-1">Policies Expiring This Month</p>
+                        <h3 class="text-white">{{$policyExpiringThisMonth}}</h3>
+                        <div class="progress mb-2 bg-white">
+                            <div class="progress-bar progress-animated bg-light" style="width: 100%"></div>
+                        </div>
                     </div>
                 </div>
             </div>

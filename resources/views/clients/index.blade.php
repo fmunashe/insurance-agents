@@ -39,6 +39,7 @@
                                     <thead>
                                     <tr>
                                         <th></th>
+                                        <th>Agent</th>
                                         <th>Name</th>
                                         <th>Surname</th>
                                         <th>Phone</th>
@@ -52,6 +53,7 @@
                                     @foreach($clients as $client)
                                         <tr>
                                             <td>{{$client->id}}</td>
+                                            <td>{{$client->agent->name??""}}</td>
                                             <td>{{$client->name}}</td>
                                             <td>{{$client->surname}}</td>
                                             <td>{{$client->mobile}}</td>

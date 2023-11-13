@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\Role;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
@@ -19,6 +20,10 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
+        if (auth()->user()->role != Role::ROLES[0]) {
+            $clients = Client::query()->where('user_id', '=', auth()->user()->id)->get();
+        }
+
         return view('clients.index', compact('clients'));
     }
 
@@ -35,7 +40,7 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-        Client::query()->create($request->validated());
+        Client::query()->create($request->all());
         Alert::toast('Client Successfully Created', 'success');
         return to_route('clients.index');
     }
@@ -45,6 +50,9 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
+        if (auth()->user()->role != Role::ROLES[0] && $client->user_id != auth()->user()->id) {
+            abort('403', 'Action not authorised');
+        }
         $currencies = Currency::all();
         $providers = Supplier::all();
         $categories = ProductCategory::all();
@@ -57,6 +65,9 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
+        if (auth()->user()->role != Role::ROLES[0] && $client->user_id != auth()->user()->id) {
+            abort('403', 'Action not authorised');
+        }
         return view('clients.edit', compact('client'));
     }
 
@@ -65,7 +76,7 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        $client->update($request->validated());
+        $client->update($request->all());
         Alert::toast('Client Successfully Updated', 'success');
         return to_route('clients.index');
     }
@@ -75,6 +86,9 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
+        if (auth()->user()->role != Role::ROLES[0] && $client->user_id != auth()->user()->id) {
+            abort('403', 'Action not authorised');
+        }
         $client->delete();
         Alert::toast('Client Successfully removed', 'success');
         return to_route('clients.index');

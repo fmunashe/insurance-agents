@@ -177,6 +177,8 @@ class Dashboard extends Component
         $totalClients = $this->totalClients();
         $totalProducts = $this->totalProducts();
         $totalProductCategories = $this->totalProductCategories();
+        $policyExpiringThisMonth = $this->policiesExpiringThisMonth();
+        $totalPremium = $this->totalPremium();
 
         $productsByCategory = $this->productsByCategory()
             ->reduce(
@@ -213,7 +215,9 @@ class Dashboard extends Component
             'totalProducts' => $totalProducts,
             'totalProductCategories' => $totalProductCategories,
             'productsByCategory' => $productsByCategory,
-            'policyHoldersByProvider' => $policyHoldersByProvider
+            'policyHoldersByProvider' => $policyHoldersByProvider,
+            'policyExpiringThisMonth' => $policyExpiringThisMonth,
+            'totalPremium' => $totalPremium
         ]);
     }
 }

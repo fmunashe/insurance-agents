@@ -12,7 +12,7 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->role == Role::ROLES[0];
+        return true;
     }
 
     /**
@@ -25,17 +25,7 @@ class StoreProductRequest extends FormRequest
         return [
             'product_category_id' => ['required', 'exists:product_categories,id'],
             'name' => ['required', 'unique:products,name'],
-            'description' => ['required'],
-            'sum_insured' => ['required', 'numeric'],
-            'premium' => ['required', 'numeric'],
-            'rate' => ['required', 'numeric'],
-            'policy_number' => ['required'],
-            'supplier_id' => ['required'],
-            'currency_id' => ['required'],
-            'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date'],
-            'status' => ['required'],
-            'number_of_terms' => ['required'],
+            'description' => ['required']
         ];
     }
 }
