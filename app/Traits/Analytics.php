@@ -151,8 +151,11 @@ trait Analytics
                 ->get();
         }
         return Insured::query()
+            ->join('products', 'products.id', '=', 'insureds.product_id')
+            ->join('clients', 'clients.id', '=', 'products.client_id')
             ->join('commissions', 'commissions.id', '=', 'insureds.commission_id')
             ->join('product_categories', 'product_categories.id', '=', 'commissions.product_category_id')
+            ->where('clients.user_id', '=', auth()->user()->id)
             ->where('commissions.user_id', '=', auth()->user()->id)
             ->selectRaw('product_categories.name as category, sum(insureds.commission_amount) as count')
             ->groupBy('category')
@@ -171,8 +174,11 @@ trait Analytics
                 ->get();
         }
         return Insured::query()
+            ->join('products', 'products.id', '=', 'insureds.product_id')
+            ->join('clients', 'clients.id', '=', 'products.client_id')
             ->join('commissions', 'commissions.id', '=', 'insureds.commission_id')
             ->join('suppliers', 'suppliers.id', '=', 'insureds.supplier_id')
+            ->where('clients.user_id', '=', auth()->user()->id)
             ->where('commissions.user_id', '=', auth()->user()->id)
             ->selectRaw('suppliers.name as provider, sum(insureds.commission_amount) as count')
             ->groupBy('provider')
