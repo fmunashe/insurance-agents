@@ -81,12 +81,12 @@
             <div class="card">
                 <div class="card-header bg-primary">
 
-                            <h4 class="text-white">Products</h4>
+                            <h4 class="text-white">Risks</h4>
 
                             <span>
                                 <a href="#" class="btn btn-sm btn-primary" data-toggle="modal"
                                data-target="#createProductModal"><i
-                                    class="la la-plus"> Add Product</i></a>
+                                    class="la la-plus"> Add Risk</i></a>
 
                             <a href="#" class="btn btn-sm btn-primary" data-toggle="modal"
                                data-target="#createInsuranceModal"><i
@@ -101,7 +101,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Category</th>
+                            <th>Risk Category</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th></th>

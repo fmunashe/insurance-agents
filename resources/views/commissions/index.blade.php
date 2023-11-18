@@ -13,14 +13,14 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>All Risks</h4>
+                <h4>All Commission Bands</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0);">Risks</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0);">All Risks</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0);">Commission Bands</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0);">All Commission Bands</a></li>
             </ol>
         </div>
     </div>
@@ -30,8 +30,8 @@
                 <div id="list-view" class="tab-pane fade active show col-lg-12">
                     <div class="card">
                         <div class="card-header bg-primary">
-                            <h4 class="card-title text-white">All Risks </h4>
-                            <a href="{{route('products.create')}}" class="btn btn-primary">+ Add new</a>
+                            <h4 class="card-title text-white">All Commission Bands </h4>
+                            <a href="{{route('commissions.create')}}" class="btn btn-primary">+ Add new</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -39,34 +39,32 @@
                                     <thead>
                                     <tr>
                                         <th></th>
-                                        <th>Client</th>
+                                        <th>Agent</th>
                                         <th>Category</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
+                                        <th>Configured Percentage</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($products as $product)
+                                    @foreach($commissions as $commission)
                                         <tr>
-                                            <td>{{$product->id}}</td>
-                                            <td>{{$product->client->name??""}}
-                                                &nbsp;{{$product->client->surname??""}}</td>
-                                            <td>{{$product->category->name??""}}</td>
-                                            <td>{{$product->name}}</td>
-                                            <td>{{$product->description}}</td>
+                                            <td>{{$commission->id}}</td>
+                                            <td>{{$commission->agent->name??""}}
+                                                &nbsp;{{$commission->agent->surname??""}}</td>
+                                            <td>{{$commission->riskCategory->name??""}}</td>
+                                            <td>{{$commission->commission_percentage}} %</td>
 
                                             <td>
-                                                <a href="{{route('products.show',$product->id)}}"
+                                                <a href="{{route('commissions.show',$commission->id)}}"
                                                    class="btn btn-sm btn-success"><i
                                                         class="la la-eye"></i></a>
-                                                <a href="{{route('products.edit',$product->id)}}"
+                                                <a href="{{route('commissions.edit',$commission->id)}}"
                                                    class="btn btn-sm btn-primary"><i
                                                         class="la la-pencil"></i></a>
                                                 <a href="#" class="btn btn-sm btn-danger" data-toggle="modal"
-                                                   data-target="#confirmModal_{{$product->id}}"><i
+                                                   data-target="#confirmModal_{{$commission->id}}"><i
                                                         class="la la-trash-o"></i></a>
-                                                @include('products.confirm')
+                                                @include('commissions.confirm')
                                             </td>
                                         </tr>
                                     @endforeach

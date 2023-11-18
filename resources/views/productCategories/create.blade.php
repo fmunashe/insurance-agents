@@ -13,13 +13,13 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Add Product Category</h4>
+                <h4>Add Risk Category</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a href="{{route('productCategories.index')}}">Product Category</a></li>
+                <li class="breadcrumb-item active"><a href="{{route('productCategories.index')}}">Risk Category</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Add Category</a></li>
             </ol>
         </div>
@@ -29,7 +29,7 @@
         <div class="col-xl-12 col-xxl-12 col-sm-12">
             <div class="card">
                 <div class="card-header bg-primary">
-                    <h5 class="card-title text-white">Basic Product Category Details Info</h5>
+                    <h5 class="card-title text-white">Basic Risk Category Details</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{route('productCategories.store')}}" method="post">

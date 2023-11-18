@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Commission;
 use App\Models\Currency;
 use App\Models\Product;
 use App\Models\Supplier;
@@ -26,6 +27,10 @@ return new class extends Migration {
             $table->date('start_date');
             $table->date('end_date');
             $table->boolean('status')->default(true);
+            $table->string('policy_schedule_link')->nullable();
+            $table->foreignIdFor(Commission::class)->nullable()->constrained()->onDelete('cascade');
+            $table->double('commission_amount')->default(0);
+
 
             $table->timestamps();
         });

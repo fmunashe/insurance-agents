@@ -18,46 +18,51 @@
                     </button>
                 </div>
                 <div class="table-responsive">
-                <div class="card-body">
-                    <table class="table table-sm">
-                        <thead>
-                        <th>Policy Number</th>
-                        <th>Provider</th>
-                        <th>Currency</th>
-                        <th>Sum Insured</th>
-                        <th>Premium</th>
-                        <th>Terms Insured</th>
-                        <th>Start Period</th>
-                        <th>End Period</th>
-                        <th>Status</th>
-                        <th></th>
-                        </thead>
-                        <tbody>
-                        @foreach($product->insureds as $insured)
-                            <tr>
-                                <td>{{$insured->policy_number}}</td>
-                                <td>{{$insured->provider->name??""}}</td>
-                                <td>{{$insured->currency->name??""}}</td>
-                                <td>{{number_format($insured->sum_insured,2)}}</td>
-                                <td>{{number_format($insured->premium,2)}}</td>
-                                <td>{{$insured->number_of_terms}}</td>
-                                <td>{{$insured->start_date}}</td>
-                                <td>{{$insured->end_date}}</td>
-                                <td>
-                                    <span class="badge {{$insured->status?"badge-success":"badge-danger"}}">{{$insured->status?"Active":"Not Active"}}</span>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal"
-                                       data-target="#confirmInsuredModal_{{$insured->id}}"><i
-                                            class="la la-trash-o"></i></a>
-                                    @include('clients.confirmInsured')
-                                </td>
-                            </tr>
-                        @endforeach
+                    <div class="card-body">
+                        <table class="table table-sm">
+                            <thead>
+                            <th>Policy Number</th>
+                            <th>Provider</th>
+                            <th>Currency</th>
+                            <th>Sum Insured</th>
+                            <th>Premium</th>
+                            <th>Terms Insured</th>
+                            <th>Start Period</th>
+                            <th>End Period</th>
+                            <th>Status</th>
+                            <th colspan="2"></th>
+                            </thead>
+                            <tbody>
+                            @foreach($product->insureds as $insured)
+                                <tr>
+                                    <td>{{$insured->policy_number}}</td>
+                                    <td>{{$insured->provider->name??""}}</td>
+                                    <td>{{$insured->currency->name??""}}</td>
+                                    <td>{{number_format($insured->sum_insured,2)}}</td>
+                                    <td>{{number_format($insured->premium,2)}}</td>
+                                    <td>{{$insured->number_of_terms}}</td>
+                                    <td>{{$insured->start_date}}</td>
+                                    <td>{{$insured->end_date}}</td>
+                                    <td>
+                                        <span
+                                            class="badge {{$insured->status?"badge-success":"badge-danger"}}">{{$insured->status?"Active":"Not Active"}}</span>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('insurance.show',$insured->id)}}" target="_blank"
+                                           class="btn btn-sm btn-outline-success"><i
+                                                class="la la-file-pdf-o"></i>Download</a>
 
-                        </tbody>
-                    </table>
-                </div>
+                                        <a href="#" class="btn btn-sm btn-danger" data-toggle="modal"
+                                           data-target="#confirmInsuredModal_{{$insured->id}}"><i
+                                                class="la la-trash-o"></i></a>
+                                        @include('clients.confirmInsured')
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 

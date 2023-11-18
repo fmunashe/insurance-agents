@@ -14,7 +14,7 @@
                 @csrf
 
                 <div class="modal-header bg-primary">
-                    <h4 class="text-white">Add New Client Product</h4>
+                    <h4 class="text-white">Add New Client Risk</h4>
                     <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label class="form-label">Product Category</label>
+                                <label class="form-label">Risk Category</label>
                                 <select value="{{old('product_category_id')}}"
                                         class="form-control @error('product_category_id') is-invalid @enderror"
                                         name="product_category_id">
@@ -42,7 +42,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <input type="hidden" name="client_id" value="{{$client->id}}">
                             <div class="form-group">
-                                <label class="form-label">Product Name</label>
+                                <label class="form-label">Risk Name</label>
                                 <input type="text" value="{{old('name')}}"
                                        class="form-control @error('name') is-invalid @enderror" name="name">
                                 @error('name')
@@ -55,7 +55,7 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
-                                <label class="form-label">Product Description</label>
+                                <label class="form-label">Risk Description</label>
                                 <textarea value="{{old('description')}}"
                                           class="form-control @error('description') is-invalid @enderror"
                                           name="description"></textarea>

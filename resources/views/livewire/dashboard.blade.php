@@ -75,7 +75,25 @@
         </div>
     </div>
 
-    <div class="col-xl-6 col-xxl-6 col-sm-6">
+    <div class="col-xl-4 col-xxl-4 col-sm-4">
+        <div class="widget-stat card bg-green-light">
+            <div class="card-body">
+                <div class="media">
+    									<span class="mr-3">
+    										<i class="la la-dollar"></i>
+    									</span>
+                    <div class="media-body text-white">
+                        <p class="mb-1">Total Commission</p>
+                        <h3 class="text-white">{{number_format($totalCommission,2)}}</h3>
+                        <div class="progress mb-2 bg-white">
+                            <div class="progress-bar progress-animated bg-light" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-xxl-4 col-sm-4">
         <div class="widget-stat card bg-blue">
             <div class="card-body">
                 <div class="media">
@@ -93,7 +111,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-6 col-xxl-6 col-sm-6">
+    <div class="col-xl-4 col-xxl-4 col-sm-4">
         <div class="widget-stat card bg-info">
             <div class="card-body">
                 <div class="media">
@@ -138,6 +156,36 @@
                     <livewire:livewire-column-chart
                         key="{{ $policyHoldersByProvider->reactiveKey() }}"
                         :column-chart-model="$policyHoldersByProvider"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Commission By Risk Category</h3>
+            </div>
+            <div class="card-body">
+                <div style="height: 300px !important;">
+
+                    <livewire:livewire-column-chart
+                        key="{{ $commissionByRiskCategory->reactiveKey() }}"
+                        :column-chart-model="$commissionByRiskCategory"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-xxl-6 col-lg-12 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Commission By Insurance Provider</h3>
+            </div>
+            <div class="card-body">
+                <div style="height: 300px !important;">
+
+                    <livewire:livewire-column-chart
+                        key="{{ $commissionByInsuranceProvider->reactiveKey() }}"
+                        :column-chart-model="$commissionByInsuranceProvider"/>
                 </div>
             </div>
         </div>

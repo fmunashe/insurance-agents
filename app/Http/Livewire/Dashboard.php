@@ -179,6 +179,7 @@ class Dashboard extends Component
         $totalProductCategories = $this->totalProductCategories();
         $policyExpiringThisMonth = $this->policiesExpiringThisMonth();
         $totalPremium = $this->totalPremium();
+        $totalCommission = $this->totalCommission();
 
         $productsByCategory = $this->productsByCategory()
             ->reduce(
@@ -208,6 +209,34 @@ class Dashboard extends Component
                     ->withGrid()
             );
 
+        $commissionByRiskCategory = $this->commissionByRiskCategory()
+            ->reduce(
+                function ($chart, $item, $key) {
+                    return $chart->addColumn($item->category, $item->count, $this->colors[rand(0, 150)]);
+                },
+                LivewireCharts::columnChartModel()
+                    ->setAnimated($this->showAnimation)
+                    ->setTitle("Commission By Risk Category")
+                    ->setOpacity(0.9)
+                    ->withOnColumnClickEventName('onColumnClick')
+                    ->setDataLabelsEnabled($this->showDataLabels)
+                    ->withGrid()
+            );
+
+        $commissionByInsuranceProvider = $this->commissionByInsuranceProvider()
+            ->reduce(
+                function ($chart, $item, $key) {
+                    return $chart->addColumn($item->provider, $item->count, $this->colors[rand(0, 150)]);
+                },
+                LivewireCharts::columnChartModel()
+                    ->setAnimated($this->showAnimation)
+                    ->setTitle("Commission By Insurance Provider")
+                    ->setOpacity(0.9)
+                    ->withOnColumnClickEventName('onColumnClick')
+                    ->setDataLabelsEnabled($this->showDataLabels)
+                    ->withGrid()
+            );
+
 
         return view('livewire.dashboard')->with([
             'totalUsers' => $totalUsers,
@@ -217,7 +246,10 @@ class Dashboard extends Component
             'productsByCategory' => $productsByCategory,
             'policyHoldersByProvider' => $policyHoldersByProvider,
             'policyExpiringThisMonth' => $policyExpiringThisMonth,
-            'totalPremium' => $totalPremium
+            'totalPremium' => $totalPremium,
+            'totalCommission' => $totalCommission,
+            'commissionByRiskCategory' => $commissionByRiskCategory,
+            'commissionByInsuranceProvider' => $commissionByInsuranceProvider,
         ]);
     }
 }

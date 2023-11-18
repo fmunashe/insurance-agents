@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>POS </title>
+    <title>{{config('app.name')}} </title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('images/logo.png')}}">
     <link rel="stylesheet" href="{{asset('vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}">
@@ -132,10 +132,10 @@
                 @if(auth()->user()->role == \App\Enum\Role::ROLES[0] || auth()->user()->role == \App\Enum\Role::ROLES[2])
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-book"></i>
-                            <span class="nav-text">Products</span>
+                            <span class="nav-text">Risks</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{route('products.index')}}">Products</a></li>
+                            <li><a href="{{route('products.index')}}">Risks</a></li>
                         </ul>
                     </li>
                 @endif
@@ -169,20 +169,20 @@
                         </ul>
                     </li>
                 @endif
-                @if(auth()->user()->role == \App\Enum\Role::ROLES[0])
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="la la-cogs"></i>
-                            <span class="nav-text">Configuration</span>
-                        </a>
-                        <ul aria-expanded="false">
+
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-cogs"></i>
+                        <span class="nav-text">Configuration</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        @if(auth()->user()->role == \App\Enum\Role::ROLES[0])
                             <li><a href="{{route('currency.index')}}">Currency</a></li>
-                            <li><a href="{{route('productCategories.index')}}">Product Categories</a></li>
-                            @if(auth()->user()->role == \App\Enum\Role::ROLES[0])
-                                <li><a href="{{route('users.index')}}">Users</a></li>
-                            @endif
-                        </ul>
-                    </li>
-                @endif
+                            <li><a href="{{route('productCategories.index')}}">Risk Categories</a></li>
+                            <li><a href="{{route('users.index')}}">Users</a></li>
+                        @endif
+                        <li><a href="{{route('commissions.index')}}">Commission Bands</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

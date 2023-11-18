@@ -10,10 +10,10 @@
 <div class="modal fade" id="createInsuranceModal">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
-            <form action="{{route('insurance.store')}}" method="post">
+            <form action="{{route('insurance.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header bg-primary">
-                    <h5 class="modal-title text-white">Attach Insurance To Existing Product</h5>
+                    <h5 class="modal-title text-white">Attach Insurance To Existing Risk</h5>
                     <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
@@ -22,7 +22,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <input type="hidden" name="client_id" value="{{$client->id}}">
                             <div class="form-group">
-                                <label class="form-label">Product</label>
+                                <label class="form-label">Select Risk</label>
                                 <select value="{{old('product_id')}}"
                                         class="form-control @error('product_id') is-invalid @enderror"
                                         name="product_id">
@@ -108,7 +108,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
                                 <label class="form-label">Insured Period Start Date</label>
                                 <input type="date" value="{{old('start_date')}}"
@@ -121,7 +121,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
                                 <label class="form-label">Insured Period End Date</label>
                                 <input type="date" value="{{old('end_date')}}"
@@ -134,6 +134,25 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label class="form-label">Choose Commission Band</label>
+                                <select class="form-control @error('commission_id') is-invalid @enderror"
+                                        name="commission_id">
+                                    @foreach($bands as $band)
+                                        <option value="{{$band->id}}">{{$band->riskCategory->name??""}}</option>
+                                    @endforeach
+                                </select>
+                                @error('commission_id')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
                                 <label class="form-label">Rate</label>
@@ -169,6 +188,20 @@
                                     <option value="0">Not Active</option>
                                 </select>
                                 @error('status')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label class="form-label">Policy Schedule Document</label>
+                                <input type="file" class="form-control @error('policy_schedule') is-invalid @enderror"
+                                       name="policy_schedule"/>
+
+                                @error('policy_schedule')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

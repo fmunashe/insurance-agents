@@ -21,17 +21,20 @@ class Insured extends Model
         'policy_number',
         'sum_insured',
         'premium',
-        'rate'
+        'rate',
+        'policy_schedule_link',
+        'commission_id',
+        'commission_amount'
     ];
 
     public function product(): BelongsTo
     {
-        return $this->belongsTo(Product::class,'product_id','id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
     public function provider(): BelongsTo
     {
-        return $this->belongsTo(Supplier::class,'supplier_id','id');
+        return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
     }
 
     public function currency(): BelongsTo

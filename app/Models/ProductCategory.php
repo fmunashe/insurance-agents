@@ -16,4 +16,9 @@ class ProductCategory extends Model
     {
         return $this->hasMany(Product::class, 'product_category_id', 'id');
     }
+
+    public function commissions(): HasMany
+    {
+        return $this->hasMany(Commission::class, 'product_category_id', 'id');
+    }
 }

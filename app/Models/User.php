@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Client::class, 'user_id', 'id');
     }
+
+    public function commissions(): HasMany
+    {
+        return $this->hasMany(Commission::class, 'user_id', 'id');
+    }
 }

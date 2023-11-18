@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
@@ -29,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/dashboard',[HomeController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -55,8 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/suppliers/export', [SupplierController::class, 'report'])->name('suppliers.report');
     Route::resource('/suppliers', SupplierController::class);
 
-    Route::resource('clients',ClientController::class);
-    Route::resource('insurance',InsuredController::class);
+    Route::resource('clients', ClientController::class);
+    Route::resource('insurance', InsuredController::class);
+    Route::resource('commissions', CommissionController::class);
 
 });
 

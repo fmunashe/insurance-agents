@@ -6,6 +6,7 @@ use App\Enum\Role;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
+use App\Models\Commission;
 use App\Models\Currency;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -53,11 +54,15 @@ class ClientController extends Controller
         if (auth()->user()->role != Role::ROLES[0] && $client->user_id != auth()->user()->id) {
             abort('403', 'Action not authorised');
         }
+
+        $bands = Commission::query()->where('user_id', '=', auth()->user()->id)->get();
+
         $currencies = Currency::all();
         $providers = Supplier::all();
         $categories = ProductCategory::all();
         $products = Product::query()->where('client_id', $client->id)->get();
-        return view('clients.show', compact('client', 'currencies', 'providers', 'categories', 'products'));
+
+        return view('clients.show', compact('client', 'currencies', 'providers', 'categories', 'products', 'bands'));
     }
 
     /**

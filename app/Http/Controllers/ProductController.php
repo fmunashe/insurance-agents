@@ -6,6 +6,7 @@ use App\Enum\Role;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Client;
+use App\Models\Commission;
 use App\Models\Currency;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -67,10 +68,12 @@ class ProductController extends Controller
         if ($product->client->user_id != auth()->user()->id && auth()->user()->role != Role::ROLES[0]) {
             abort(403, 'Action not allowed');
         }
+        $bands = Commission::query()->where('user_id', '=', auth()->user()->id)->get();
+
         $currencies = Currency::all();
         $providers = Supplier::all();
         $categories = ProductCategory::all();
-        return view('products.show', compact('product', 'currencies', 'providers', 'categories'));
+        return view('products.show', compact('product', 'currencies', 'providers', 'categories', 'bands'));
     }
 
     /**

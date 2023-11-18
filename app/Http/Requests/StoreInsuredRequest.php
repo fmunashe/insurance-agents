@@ -30,9 +30,10 @@ class StoreInsuredRequest extends FormRequest
             'supplier_id' => ['required'],
             'currency_id' => ['required'],
             'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date','after:start_date'],
+            'end_date' => ['required', 'date', 'after:start_date'],
             'status' => ['required'],
             'number_of_terms' => ['required'],
+            'policy_schedule' => 'required|mimes:docx,pdf,png,jpeg,jpg'
         ];
     }
 }

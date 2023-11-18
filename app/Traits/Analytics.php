@@ -124,6 +124,62 @@ trait Analytics
             ->sum('premium');
     }
 
+    public function totalCommission()
+    {
+        if (auth()->user()->role == Role::ROLES[0]) {
+            return Insured::query()
+                ->where('status', '=', 1)
+                ->sum('commission_amount');
+        }
+        return Insured::query()
+            ->join('products', 'products.id', '=', 'insureds.product_id')
+            ->join('clients', 'clients.id', '=', 'products.client_id')
+            ->where('clients.user_id', '=', auth()->user()->id)
+            ->where('status', '=', 1)
+            ->sum('commission_amount');
+    }
+
+
+    public function commissionByRiskCategory(): \Illuminate\Database\Eloquent\Collection|array
+    {
+        if (auth()->user()->role == Role::ROLES[0]) {
+            return Insured::query()
+                ->join('commissions', 'commissions.id', '=', 'insureds.commission_id')
+                ->join('product_categories', 'product_categories.id', '=', 'commissions.product_category_id')
+                ->selectRaw('product_categories.name as category, sum(insureds.commission_amount) as count')
+                ->groupBy('category')
+                ->get();
+        }
+        return Insured::query()
+            ->join('commissions', 'commissions.id', '=', 'insureds.commission_id')
+            ->join('product_categories', 'product_categories.id', '=', 'commissions.product_category_id')
+            ->where('commissions.user_id', '=', auth()->user()->id)
+            ->selectRaw('product_categories.name as category, sum(insureds.commission_amount) as count')
+            ->groupBy('category')
+            ->get();
+
+    }
+
+    public function commissionByInsuranceProvider(): \Illuminate\Database\Eloquent\Collection|array
+    {
+        if (auth()->user()->role == Role::ROLES[0]) {
+            return Insured::query()
+                ->join('commissions', 'commissions.id', '=', 'insureds.commission_id')
+                ->join('suppliers', 'suppliers.id', '=', 'insureds.supplier_id')
+                ->selectRaw('suppliers.name as provider, sum(insureds.commission_amount) as count')
+                ->groupBy('provider')
+                ->get();
+        }
+        return Insured::query()
+            ->join('commissions', 'commissions.id', '=', 'insureds.commission_id')
+            ->join('suppliers', 'suppliers.id', '=', 'insureds.supplier_id')
+            ->where('commissions.user_id', '=', auth()->user()->id)
+            ->selectRaw('suppliers.name as provider, sum(insureds.commission_amount) as count')
+            ->groupBy('provider')
+            ->get();
+
+    }
+
 
     public function roles()
     {
@@ -131,20 +187,4 @@ trait Analytics
             ->count('role');
     }
 
-    public function trend()
-    {
-        [$labels, $data] = Doughnut::make(User::class)
-            ->options(Role::ROLES)
-            ->count('role');
-        return $data;
-        return [
-            'datasets' => [
-                [
-                    'label' => 'Users',
-                    'data' => $data,
-                ],
-            ],
-            'labels' => $labels,
-        ];
-    }
 }

@@ -13,14 +13,14 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Product Categories</h4>
+                <h4>Risk Categories</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0);">Product Categories</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0);">All Categories</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0);">Risk Categories</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0);">All Risk Categories</a></li>
             </ol>
         </div>
     </div>
@@ -30,7 +30,7 @@
                 <div id="list-view" class="tab-pane fade active show col-lg-12">
                     <div class="card">
                         <div class="card-header bg-primary">
-                            <h4 class="card-title text-white">All Users </h4>
+                            <h4 class="card-title text-white">All Categories </h4>
                             <a href="{{route('productCategories.create')}}" class="btn btn-primary">+ Add new</a>
                         </div>
                         <div class="card-body">
