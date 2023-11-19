@@ -180,6 +180,7 @@
                             <li><a href="{{route('productCategories.index')}}">Risk Categories</a></li>
                             <li><a href="{{route('users.index')}}">Users</a></li>
                         @endif
+                        <li><a href="{{route('productCategories.index')}}">Risk Categories</a></li>
                         <li><a href="{{route('commissions.index')}}">Commission Bands</a></li>
                     </ul>
                 </li>
