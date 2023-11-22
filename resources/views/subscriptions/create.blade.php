@@ -43,61 +43,66 @@
                                             <div class="col-md-3">
                                                 <div class="new-arrival-product">
                                                     <div class="new-arrivals-img-contnent">
-                                                        <img class="img-fluid" src="images/product/2.jpg" alt="">
+                                                        <img class="img-fluid"
+                                                             src="{{asset('images/courses/pic1.jpg')}}" alt="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-9">
                                                 <div class="new-arrival-content position-relative">
-                                                    <h4>Solid Women's V-neck Dark T-Shirt</h4>
-                                                    <p class="price">$320.00</p>
-                                                    <p>Availability: <span class="item"> In stock <i
-                                                                class="fa fa-check-circle text-success"></i></span></p>
-                                                    <p>Product code: <span class="item">0405689</span></p>
-                                                    <p>Brand: <span class="item">Lee</span></p>
-                                                    <p class="text-content">There are many variations of passages of Lorem Ipsum available,
-                                                        but the majority have suffered alteration in some form, by injected humour, or
-                                                        randomised words which don't look even slightly believable. If you
-                                                        are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything
-                                                        embarrassing.</p>
-                                                    <div class="comment-review star-rating text-right">
-                                                        <ul>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star-half-empty"></i></li>
-                                                            <li><i class="fa fa-star-half-empty"></i></li>
-                                                        </ul>
-                                                        <span class="review-text">(34 reviews) / </span><a class="product-review" href="">Write
-                                                            a review?</a>
+                                                    <h4>Choose your preferred package</h4>
+
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-group row">
+                                                            @foreach($plans as $plan)
+                                                                <label class="radio-inline col-lg-3">
+                                                                    <input type="radio" name="package"
+                                                                           value="{{$plan->stripe_key}}">
+                                                                    <p>{{$plan->name}}</p>
+                                                                    <p class="price">
+                                                                        ${{number_format($plan->amount)}}</p></label>
+                                                            @endforeach
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="form-label">Card Holder Name</label>
+                                                            <input id="card-holder-name" type="text"
+                                                                   value="{{old('name')}}"
+                                                                   class="form-control @error('name') is-invalid @enderror"
+                                                                   name="name">
+                                                            @error('name')
+                                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <!-- Stripe Elements Placeholder -->
+                                                    <div class="col-md-8 p-4" id="card-element"></div>
+
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <button type="submit" class="btn btn-primary" id="card-button">
+                                                            Subscribe
+                                                        </button>
+                                                        <a href="{{route('dashboard')}}"
+                                                           class="btn btn-danger">Cancel</a>
                                                     </div>
                                                 </div>
+
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label class="form-label">Card Holder Name</label>
-                                    <input id="card-holder-name" type="text" value="{{old('name')}}"
-                                           class="form-control @error('name') is-invalid @enderror" name="name">
-                                    @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <!-- Stripe Elements Placeholder -->
-                            <div class="col-md-6 p-4" id="card-element"></div>
 
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <button type="submit" class="btn btn-primary" id="card-button">Subscribe
-                                </button>
-                                <a href="{{route('dashboard')}}" class="btn btn-danger">Cancel</a>
-                            </div>
                         </div>
                     </form>
                 </div>
@@ -133,9 +138,6 @@
                     }
                 );
 
-                console.log('setup intent is');
-                console.log(setupIntent)
-
                 if (error) {
                     console.log(error.message);
                 } else {
@@ -143,6 +145,7 @@
                     stripeTokenHandler(setupIntent);
                 }
             });
+
             function stripeTokenHandler(setupIntent) {
                 const hiddenInput = document.createElement('input');
                 hiddenInput.setAttribute('type', 'hidden');

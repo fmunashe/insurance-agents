@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockReceivingController;
+use App\Http\Controllers\SubscriptionPlanController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -63,6 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('commissions', CommissionController::class);
     Route::get('subscription', [HomeController::class, 'getSubscriptionForm'])->name('getSubscriptionForm');
     Route::post('subscribe', [HomeController::class, 'subscribe'])->name('service.subscription');
+    Route::resource('subscriptionPlan', SubscriptionPlanController::class);
 
 });
 

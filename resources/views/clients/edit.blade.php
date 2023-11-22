@@ -38,7 +38,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">Name</label>
+                                    <label class="form-label">Name / Company</label>
                                     <input type="text" value="{{$client->name}}" class="form-control @error('name') is-invalid @enderror" name="name">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -82,7 +82,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">ID Number</label>
+                                    <label class="form-label">ID Number / Company Reg number</label>
                                     <input type="text" value="{{$client->id_number}}" class="form-control @error('id_number') is-invalid @enderror" name="id_number">
                                     @error('id_number')
                                     <span class="invalid-feedback" role="alert">

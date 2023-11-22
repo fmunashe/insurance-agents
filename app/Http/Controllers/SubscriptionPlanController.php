@@ -13,7 +13,11 @@ class SubscriptionPlanController extends Controller
      */
     public function index()
     {
-        //
+//        $user = auth()->user();
+//        dd($user->onTrial('Service-Subscription'));
+//        dd($user->subscribed('Service-Subscription'));
+        $plans = SubscriptionPlan::all();
+        return view('subscriptions.index', compact('plans'));
     }
 
     /**
@@ -21,7 +25,7 @@ class SubscriptionPlanController extends Controller
      */
     public function create()
     {
-        //
+        return view('subscriptions.create-plan');
     }
 
     /**
@@ -29,7 +33,9 @@ class SubscriptionPlanController extends Controller
      */
     public function store(StoreSubscriptionPlanRequest $request)
     {
-        //
+        SubscriptionPlan::query()->create($request->all());
+        toast('Plan Successfully Added', 'success');
+        return to_route('subscriptionPlan.index');
     }
 
     /**
@@ -45,7 +51,7 @@ class SubscriptionPlanController extends Controller
      */
     public function edit(SubscriptionPlan $subscriptionPlan)
     {
-        //
+        return view('subscriptions.edit-plan', compact('subscriptionPlan'));
     }
 
     /**
@@ -53,7 +59,9 @@ class SubscriptionPlanController extends Controller
      */
     public function update(UpdateSubscriptionPlanRequest $request, SubscriptionPlan $subscriptionPlan)
     {
-        //
+        $subscriptionPlan->update($request->all());
+        toast('Plan Successfully Updated', 'success');
+        return to_route('subscriptionPlan.index');
     }
 
     /**
@@ -61,6 +69,8 @@ class SubscriptionPlanController extends Controller
      */
     public function destroy(SubscriptionPlan $subscriptionPlan)
     {
-        //
+        $subscriptionPlan->delete();
+        toast('Plan Successfully Removed', 'success');
+        return to_route('subscriptionPlan.index');
     }
 }

@@ -14,6 +14,7 @@ class CurrencySeeder extends Seeder
     public function run(): void
     {
         $currencies = [
+            ['name' => 'KSH', 'rate' => 1],
             ['name' => 'USD', 'rate' => 1],
             ['name' => 'ZWL', 'rate' => 5000],
             ['name' => 'ZAR', 'rate' => 18],

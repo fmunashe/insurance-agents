@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SubscriptionPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,8 +23,9 @@ class HomeController extends Controller
     public function getSubscriptionForm()
     {
         $intent = auth()->user()->createSetupIntent();
+        $plans = SubscriptionPlan::all();
 
-        return view('subscriptions.create', compact('intent'));
+        return view('subscriptions.create', compact('intent', 'plans'));
     }
 
     public function subscribe(Request $request)
@@ -32,7 +34,7 @@ class HomeController extends Controller
         $user = auth()->user();
 
         // Create a new subscription
-        $user->newSubscription('Service-Subscription', 'price_1OE9RXGytOIEXXD1JzZDLSJi')
+        $user->newSubscription('Service-Subscription', $request->package)
             ->trialUntil(Carbon::now()->addDays(5))
             ->create($request->stripeToken);
         Alert::success("Subscription went through successfully")->autoClose(false);

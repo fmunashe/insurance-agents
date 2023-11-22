@@ -38,8 +38,9 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                                 <div class="form-group">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" name="name">
+                                    <label class="form-label">Name / Company</label>
+                                    <input type="text" value="{{old('name')}}"
+                                           class="form-control @error('name') is-invalid @enderror" name="name">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -50,7 +51,8 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">Surname</label>
-                                    <input type="text" value="{{old('surname')}}" class="form-control @error('surname') is-invalid @enderror" name="surname">
+                                    <input type="text" value="{{old('surname')}}"
+                                           class="form-control @error('surname') is-invalid @enderror" name="surname">
                                     @error('surname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -61,7 +63,8 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">Phone</label>
-                                    <input type="text" value="{{old('mobile')}}" class="form-control @error('mobile') is-invalid @enderror" name="mobile">
+                                    <input type="text" value="{{old('mobile')}}"
+                                           class="form-control @error('mobile') is-invalid @enderror" name="mobile">
                                     @error('mobile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -72,7 +75,8 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">Email</label>
-                                    <input type="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror" name="email">
+                                    <input type="email" value="{{old('email')}}"
+                                           class="form-control @error('email') is-invalid @enderror" name="email">
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -82,8 +86,10 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">ID Number</label>
-                                    <input type="text" value="{{old('id_number')}}" class="form-control @error('id_number') is-invalid @enderror" name="id_number">
+                                    <label class="form-label">ID Number / Company Reg Number</label>
+                                    <input type="text" value="{{old('id_number')}}"
+                                           class="form-control @error('id_number') is-invalid @enderror"
+                                           name="id_number">
                                     @error('id_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -94,9 +100,10 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">Gender</label>
-                                    <select  value="{{old('gender')}}" class="form-control @error('gender') is-invalid @enderror" name="gender">
+                                    <select value="{{old('gender')}}"
+                                            class="form-control @error('gender') is-invalid @enderror" name="gender">
                                         @foreach(\App\Enum\Gender::GENDERS as $gender)
-                                            <option value="{{$gender}}" >{{$gender}}</option>
+                                            <option value="{{$gender}}">{{$gender}}</option>
                                         @endforeach
                                     </select>
                                     @error('gender')
@@ -110,7 +117,8 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">Address</label>
-                                    <textarea class="form-control @error('address') is-invalid @enderror" name="address">{{old('address')}}</textarea>
+                                    <textarea class="form-control @error('address') is-invalid @enderror"
+                                              name="address">{{old('address')}}</textarea>
                                     @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

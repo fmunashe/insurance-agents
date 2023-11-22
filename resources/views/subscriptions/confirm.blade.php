@@ -8,10 +8,10 @@
  */
 
 ?>
-<div class="modal fade" id="confirmModal_{{$supplier->id}}">
+<div class="modal fade" id="confirmModal_{{$plan->id}}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{route('suppliers.destroy',$supplier->id)}}" method="post">
+            <form action="{{route('subscriptionPlan.destroy',$plan->id)}}" method="post">
                 @csrf
                 @method('delete')
                 <div class="modal-header bg-primary">
@@ -20,15 +20,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure to delete the record below? This action is permanent and all clients under this provider will be deleted as well</p>
+                    <p>Are you sure to delete the record below? This action is permanent and all clients under this
+                        provider will be deleted as well</p>
                     <table class="table table-responsive-sm">
                         <tr>
                             <td>Name</td>
-                            <td>{{$supplier->name}}</td>
+                            <td>{{$plan->name}}</td>
                         </tr>
                         <tr>
-                            <td>Address</td>
-                            <td>{{$supplier->address}}</td>
+                            <td>Amount</td>
+                            <td>{{number_format($plan->amount,2)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Stripe Key</td>
+                            <td>{{$plan->stripe_key}}</td>
                         </tr>
                     </table>
                 </div>

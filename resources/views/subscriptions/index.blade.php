@@ -6,170 +6,65 @@
  * Date: 13/7/2023
  * Time: 15:03
  */
-
 ?>
 @extends('layouts.app')
 @section('content')
 
+    <div class="row page-titles mx-0">
+        <div class="col-sm-6 p-md-0">
+            <div class="welcome-text">
+                <h4>Subscription Plans</h4>
+            </div>
+        </div>
+        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0);">Plans</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0);">Plans</a></li>
+            </ol>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row m-b-30">
-                        <div class="col-md-3">
-                            <div class="new-arrival-product">
-                                <div class="new-arrivals-img-contnent">
-                                    <img class="img-fluid" src="images/product/2.jpg" alt="">
-                                </div>
-                            </div>
+        <div class="col-lg-12">
+            <div class="row tab-content">
+                <div id="list-view" class="tab-pane fade active show col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-primary">
+                            <h4 class="card-title text-white">All Subscription Plans </h4>
+                            <a href="{{route('subscriptionPlan.create')}}" class="btn btn-primary">+ Add new</a>
                         </div>
-                        <div class="col-md-9">
-                            <div class="new-arrival-content position-relative">
-                                <h4>Solid Women's V-neck Dark T-Shirt</h4>
-                                <p class="price">$320.00</p>
-                                <p>Availability: <span class="item"> In stock <i
-                                            class="fa fa-check-circle text-success"></i></span></p>
-                                <p>Product code: <span class="item">0405689</span></p>
-                                <p>Brand: <span class="item">Lee</span></p>
-                                <p class="text-content">There are many variations of passages of Lorem Ipsum available,
-                                    but the majority have suffered alteration in some form, by injected humour, or
-                                    randomised words which don't look even slightly believable. If you
-                                    are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything
-                                    embarrassing.</p>
-                                <div class="comment-review star-rating text-right">
-                                    <ul>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-empty"></i></li>
-                                        <li><i class="fa fa-star-half-empty"></i></li>
-                                    </ul>
-                                    <span class="review-text">(34 reviews) / </span><a class="product-review" href="">Write
-                                        a review?</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row m-b-30">
-                        <div class="col-md-3">
-                            <div class="new-arrival-product">
-                                <div class="new-arrivals-img-contnent">
-                                    <img class="img-fluid" src="images/product/2.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="new-arrival-content position-relative">
-                                <h4>Solid Women's V-neck Dark T-Shirt</h4>
-                                <p class="price">$320.00</p>
-                                <p>Availability: <span class="item"> In stock <i
-                                            class="fa fa-check-circle text-success"></i></span></p>
-                                <p>Product code: <span class="item">0405689</span></p>
-                                <p>Brand: <span class="item">Lee</span></p>
-                                <p class="text-content">There are many variations of passages of Lorem Ipsum available,
-                                    but the majority have suffered alteration in some form, by injected humour, or
-                                    randomised words which don't look even slightly believable. If you
-                                    are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything
-                                    embarrassing.</p>
-                                <div class="comment-review star-rating text-right">
-                                    <ul>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-empty"></i></li>
-                                        <li><i class="fa fa-star-half-empty"></i></li>
-                                    </ul>
-                                    <span class="review-text">(34 reviews) / </span><a class="product-review" href="">Write
-                                        a review?</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row m-b-30">
-                        <div class="col-md-3">
-                            <div class="new-arrival-product">
-                                <div class="new-arrivals-img-contnent">
-                                    <img class="img-fluid" src="images/product/2.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="new-arrival-content position-relative">
-                                <h4>Solid Women's V-neck Dark T-Shirt</h4>
-                                <p class="price">$320.00</p>
-                                <p>Availability: <span class="item"> In stock <i
-                                            class="fa fa-check-circle text-success"></i></span></p>
-                                <p>Product code: <span class="item">0405689</span></p>
-                                <p>Brand: <span class="item">Lee</span></p>
-                                <p class="text-content">There are many variations of passages of Lorem Ipsum available,
-                                    but the majority have suffered alteration in some form, by injected humour, or
-                                    randomised words which don't look even slightly believable. If you
-                                    are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything
-                                    embarrassing.</p>
-                                <div class="comment-review star-rating text-right">
-                                    <ul>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-empty"></i></li>
-                                        <li><i class="fa fa-star-half-empty"></i></li>
-                                    </ul>
-                                    <span class="review-text">(34 reviews) / </span><a class="product-review" href="">Write
-                                        a review?</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row m-b-30">
-                        <div class="col-md-3">
-                            <div class="new-arrival-product">
-                                <div class="new-arrivals-img-contnent">
-                                    <img class="img-fluid" src="images/product/2.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="new-arrival-content position-relative">
-                                <h4>Solid Women's V-neck Dark T-Shirt</h4>
-                                <p class="price">$320.00</p>
-                                <p>Availability: <span class="item"> In stock <i
-                                            class="fa fa-check-circle text-success"></i></span></p>
-                                <p>Product code: <span class="item">0405689</span></p>
-                                <p>Brand: <span class="item">Lee</span></p>
-                                <p class="text-content">There are many variations of passages of Lorem Ipsum available,
-                                    but the majority have suffered alteration in some form, by injected humour, or
-                                    randomised words which don't look even slightly believable. If you
-                                    are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything
-                                    embarrassing.</p>
-                                <div class="comment-review star-rating text-right">
-                                    <ul>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-empty"></i></li>
-                                        <li><i class="fa fa-star-half-empty"></i></li>
-                                    </ul>
-                                    <span class="review-text">(34 reviews) / </span><a class="product-review" href="">Write
-                                        a review?</a>
-                                </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example3" class="display" style="min-width: 845px">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Plan Name</th>
+                                        <th>Amount</th>
+                                        <th>Stripe Key</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($plans as $plan)
+                                        <tr>
+                                            <td>{{$plan->id}}</td>
+                                            <td>{{$plan->name}}</td>
+                                            <td>{{number_format($plan->amount,2)}}</td>
+                                            <td>{{$plan->stripe_key}}</td>
+                                            <td>
+                                                <a href="{{route('subscriptionPlan.edit',$plan->id)}}"
+                                                   class="btn btn-sm btn-success"><i
+                                                        class="la la-pencil"></i></a>
+                                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal"
+                                                   data-target="#confirmModal_{{$plan->id}}"><i
+                                                        class="la la-trash-o"></i></a>
+                                                @include('subscriptions.confirm')
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -177,5 +72,4 @@
             </div>
         </div>
     </div>
-
 @endsection
