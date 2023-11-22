@@ -19,7 +19,8 @@ class UserSeeder extends Seeder
         $users = [
             ['name' => 'Administrator', 'email' => 'admin@insurance.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[0]],
             ['name' => 'User', 'email' => 'user@insurance.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[1]],
-            ['name' => 'Agent', 'email' => 'agent@insurance.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[2]]
+            ['name' => 'Agent', 'email' => 'agent@insurance.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[2]],
+            ['name' => 'Shix Insurance', 'email' => 'shix@insurance.com', 'password' => Hash::make('password'), 'role' => Role::ROLES[2]]
         ];
 
         User::query()->delete();

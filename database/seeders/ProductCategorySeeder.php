@@ -12,11 +12,12 @@ class ProductCategorySeeder extends Seeder
      */
     public function run(): void
     {
+
         $categories = [
-            ['id' => 1, 'name' => 'Vehicles'],
-            ['id' => 2, 'name' => 'Residential'],
-            ['id' => 3, 'name' => 'Industrial'],
-            ['id' => 4, 'name' => 'Domestic'],
+            ['id' => 1, 'name' => 'Vehicles', 'user_id' => 1],
+            ['id' => 2, 'name' => 'Residential', 'user_id' => 1],
+            ['id' => 3, 'name' => 'Industrial', 'user_id' => 1],
+            ['id' => 4, 'name' => 'Domestic', 'user_id' => 1],
         ];
         ProductCategory::query()->delete();
         foreach ($categories as $category) {

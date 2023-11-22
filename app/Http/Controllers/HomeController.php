@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Enum\Role;
-use App\Models\User;
 use Illuminate\Http\Request;
-use SaKanjo\EasyMetrics\Metrics\Doughnut;
-use SaKanjo\EasyMetrics\Metrics\Trend;
-use SaKanjo\EasyMetrics\Metrics\Value;
+use Illuminate\Support\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -18,27 +15,28 @@ class HomeController extends Controller
 
     public function dashboard(Request $request)
     {
-
-        $roles = Doughnut::make(User::class)
-            ->count('role');
-
-        [$labels, $data] = Trend::make(User::class)
-            ->countByMonths();
-//        dd($roles);
-
-        [$labels, $data] = Doughnut::make(User::class)
-            ->options(Role::ROLES)
-            ->count('role');
-//
-//        return [
-//            'datasets' => [
-//                [
-//                    'label' => 'Users',
-//                    'data' => $data,
-//                ],
-//            ],
-//            'labels' => $labels,
-//        ];
         return view('dashboard');
+    }
+
+
+    public function getSubscriptionForm()
+    {
+        $intent = auth()->user()->createSetupIntent();
+
+        return view('subscriptions.create', compact('intent'));
+    }
+
+    public function subscribe(Request $request)
+    {
+        // Get the user
+        $user = auth()->user();
+
+        // Create a new subscription
+        $user->newSubscription('Service-Subscription', 'price_1OE9RXGytOIEXXD1JzZDLSJi')
+            ->trialUntil(Carbon::now()->addDays(5))
+            ->create($request->stripeToken);
+        Alert::success("Subscription went through successfully")->autoClose(false);
+
+        return to_route('dashboard');
     }
 }

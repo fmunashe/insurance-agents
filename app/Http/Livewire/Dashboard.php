@@ -237,6 +237,8 @@ class Dashboard extends Component
                     ->withGrid()
             );
 
+        $totalActivePolices = $this->totalActivePolicies();
+
 
         return view('livewire.dashboard')->with([
             'totalUsers' => $totalUsers,
@@ -250,6 +252,7 @@ class Dashboard extends Component
             'totalCommission' => $totalCommission,
             'commissionByRiskCategory' => $commissionByRiskCategory,
             'commissionByInsuranceProvider' => $commissionByInsuranceProvider,
+            'totalActivePolices' => $totalActivePolices,
         ]);
     }
 }

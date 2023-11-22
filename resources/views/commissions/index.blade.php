@@ -39,8 +39,8 @@
                                     <thead>
                                     <tr>
                                         <th></th>
-                                        <th>Agent</th>
-                                        <th>Category</th>
+                                        <th>Agent Name</th>
+                                        <th>Risk Category</th>
                                         <th>Configured Percentage</th>
                                         <th>Action</th>
                                     </tr>

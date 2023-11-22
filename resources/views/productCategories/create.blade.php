@@ -35,10 +35,12 @@
                     <form action="{{route('productCategories.store')}}" method="post">
                         @csrf
                         <div class="row">
+                            <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">Category Name</label>
-                                    <input type="text" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" name="name">
+                                    <input type="text" value="{{old('name')}}"
+                                           class="form-control @error('name') is-invalid @enderror" name="name">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

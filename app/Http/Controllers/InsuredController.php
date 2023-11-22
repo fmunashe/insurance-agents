@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\Role;
 use App\Http\Requests\StoreInsuredRequest;
 use App\Http\Requests\UpdateInsuredRequest;
 use App\Models\Commission;
@@ -90,5 +91,24 @@ class InsuredController extends Controller
         $insurance->delete();
         Alert::toast('Insurance Policy Successfully Removed From Risk', 'success');
         return back();
+    }
+
+    public function getPolicies()
+    {
+        $policies = Insured::all();
+        if (auth()->user()->role != Role::ROLES[0]) {
+            $policies = Insured::query()
+                ->join('products', 'products.id', '=', 'insureds.product_id')
+                ->join('clients', 'clients.id', '=', 'products.client_id')
+                ->where('clients.user_id', '=', auth()->user()->id)
+                ->selectRaw('insureds.*')
+                ->get();
+        }
+        return view('policy.index', compact('policies'));
+    }
+
+    public function showPolicy(Insured $policy): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('policy.show', compact('policy'));
     }
 }

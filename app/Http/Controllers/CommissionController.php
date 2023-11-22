@@ -31,6 +31,9 @@ class CommissionController extends Controller
     public function create()
     {
         $categories = ProductCategory::all();
+        if (auth()->user()->role != Role::ROLES[0]) {
+            $categories = $categories->where('user_id', '=', auth()->user()->id)->collect();
+        }
         return view('commissions.create', compact('categories'));
     }
 
@@ -58,6 +61,9 @@ class CommissionController extends Controller
     public function edit(Commission $commission)
     {
         $categories = ProductCategory::all();
+        if (auth()->user()->role != Role::ROLES[0]) {
+            $categories = $categories->where('user_id', '=', auth()->user()->id)->collect();
+        }
         return view('commissions.edit', compact('commission', 'categories'));
     }
 

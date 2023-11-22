@@ -57,8 +57,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('/suppliers', SupplierController::class);
 
     Route::resource('clients', ClientController::class);
+    Route::get('policies', [InsuredController::class, 'getPolicies'])->name('policies');
+    Route::get('showPolicy/{policy}', [InsuredController::class, 'showPolicy'])->name('showPolicy');
     Route::resource('insurance', InsuredController::class);
     Route::resource('commissions', CommissionController::class);
+    Route::get('subscription', [HomeController::class, 'getSubscriptionForm'])->name('getSubscriptionForm');
+    Route::post('subscribe', [HomeController::class, 'subscribe'])->name('service.subscription');
 
 });
 

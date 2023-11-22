@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\Role;
 use App\Http\Requests\StoreProductCategoryRequest;
 use App\Http\Requests\UpdateProductCategoryRequest;
 use App\Models\ProductCategory;
@@ -15,6 +16,9 @@ class ProductCategoryController extends Controller
     public function index()
     {
         $categories = ProductCategory::all();
+        if (auth()->user()->role != Role::ROLES[0]) {
+            $categories = $categories->where('user_id', '=', auth()->user()->id)->collect();
+        }
         return view('productCategories.index', compact('categories'));
     }
 

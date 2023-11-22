@@ -148,6 +148,14 @@
                         <li><a href="{{route('clients.index')}}">Clients</a></li>
                     </ul>
                 </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-paper-plane"></i>
+                        <span class="nav-text">Policies</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('policies')}}">Policies</a></li>
+                    </ul>
+                </li>
                 @if(auth()->user()->role == \App\Enum\Role::ROLES[0])
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-money"></i>
@@ -177,11 +185,12 @@
                     <ul aria-expanded="false">
                         @if(auth()->user()->role == \App\Enum\Role::ROLES[0])
                             <li><a href="{{route('currency.index')}}">Currency</a></li>
-                            <li><a href="{{route('productCategories.index')}}">Risk Categories</a></li>
                             <li><a href="{{route('users.index')}}">Users</a></li>
+                            <li><a href="{{route('getSubscriptionForm')}}">Subscriptions</a></li>
                         @endif
                         <li><a href="{{route('productCategories.index')}}">Risk Categories</a></li>
                         <li><a href="{{route('commissions.index')}}">Commission Bands</a></li>
+
                     </ul>
                 </li>
             </ul>
@@ -239,6 +248,7 @@
 @include('sweetalert::alert')
 @livewireScripts
 @livewireChartsScripts
+@stack('scripts')
 <!-- Datatable -->
 <script src="{{asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/plugins-init/datatables.init.js')}}"></script>

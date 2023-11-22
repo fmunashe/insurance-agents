@@ -52,8 +52,11 @@ trait Analytics
 
     public function totalProductCategories(): float
     {
-        return Value::make(ProductCategory::class)
-            ->count();
+        if (auth()->user()->role == Role::ROLES[0]) {
+            return Value::make(ProductCategory::class)
+                ->count();
+        }
+        return ProductCategory::query()->where('user_id', '=', auth()->user()->id)->count();
     }
 
     public function productsByCategory(): \Illuminate\Database\Eloquent\Collection|array
@@ -69,6 +72,7 @@ trait Analytics
             ->join('product_categories', 'product_categories.id', '=', 'products.product_category_id')
             ->join('clients', 'clients.id', '=', 'products.client_id')
             ->where('clients.user_id', '=', auth()->user()->id)
+            ->where('product_categories.user_id', '=', auth()->user()->id)
             ->selectRaw('product_categories.name as category, COUNT(products.id) as count')
             ->groupBy('category')
             ->get();
@@ -157,6 +161,7 @@ trait Analytics
             ->join('product_categories', 'product_categories.id', '=', 'commissions.product_category_id')
             ->where('clients.user_id', '=', auth()->user()->id)
             ->where('commissions.user_id', '=', auth()->user()->id)
+            ->where('product_categories.user_id', '=', auth()->user()->id)
             ->selectRaw('product_categories.name as category, sum(insureds.commission_amount) as count')
             ->groupBy('category')
             ->get();
@@ -184,6 +189,20 @@ trait Analytics
             ->groupBy('provider')
             ->get();
 
+    }
+
+    public function totalActivePolicies(): int
+    {
+        $policies = Insured::query()->where('status', '=', 1)->count();
+        if (auth()->user()->role != Role::ROLES[0]) {
+            $policies = Insured::query()
+                ->join('products', 'products.id', '=', 'insureds.product_id')
+                ->join('clients', 'clients.id', '=', 'products.client_id')
+                ->where('clients.user_id', '=', auth()->user()->id)
+                ->where('insureds.status', '=', 1)
+                ->count('insureds.id');
+        }
+        return $policies;
     }
 
 
