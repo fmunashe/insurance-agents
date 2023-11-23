@@ -63,6 +63,7 @@ class ClientController extends Controller
         $products = Product::query()->where('client_id', $client->id)->get();
         if (auth()->user()->role != Role::ROLES[0]) {
             $categories = $categories->where('user_id','=',auth()->user()->id)->collect();
+            $providers = $providers->where('user_id', '=', auth()->user()->id)->collect();
         }
 
         return view('clients.show', compact('client', 'currencies', 'providers', 'categories', 'products', 'bands'));

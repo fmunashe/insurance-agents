@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Enum\Role;
 use App\Models\Supplier;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -12,12 +13,17 @@ class InsuranceProvidersExport implements FromCollection, WithMapping, WithHeadi
 {
     public function collection()
     {
-        return Supplier::all();
+        $suppliers = Supplier::all();
+        if (auth()->user()->role != Role::ROLES[0]) {
+            $suppliers = $suppliers->where('user_id', '=', auth()->user()->id);
+        }
+        return $suppliers;
     }
 
     public function map($supplier): array
     {
         return [
+            $supplier->agent->name ?? "",
             $supplier->name,
             $supplier->phone,
             $supplier->email,
@@ -28,7 +34,7 @@ class InsuranceProvidersExport implements FromCollection, WithMapping, WithHeadi
     public function headings(): array
     {
         return [
-            ['Name', 'Phone', 'Email', 'Address'],
+            ['Agent', 'Name', 'Phone', 'Email', 'Address'],
         ];
     }
 }

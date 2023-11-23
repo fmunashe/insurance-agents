@@ -61,6 +61,10 @@
                                     <strong>Description</strong>
                                     <span class="mb-0 text-right">{{$policy->product->description}}</span>
                                 </li>
+                                <li class="list-group-item d-flex px-0 justify-content-between">
+                                    <strong>Policy Document</strong>
+                                    <span class="mb-0 text-right"><a href="{{route('insurance.show',$policy->id)}}" class="btn btn-sm btn-warning text-white"><i class="la la-download text-white"></i> Download</a></span>
+                                </li>
 
                             </ul>
                         </div>

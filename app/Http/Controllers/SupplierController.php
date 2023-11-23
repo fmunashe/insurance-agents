@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\Role;
 use App\Exports\InsuranceProvidersExport;
 use App\Http\Requests\StoreSupplierRequest;
 use App\Http\Requests\UpdateSupplierRequest;
@@ -17,6 +18,9 @@ class SupplierController extends Controller
     public function index()
     {
         $suppliers = Supplier::all();
+        if (auth()->user()->role != Role::ROLES[0]) {
+            $suppliers = $suppliers->where('user_id', '=', auth()->user()->id);
+        }
         return view('suppliers.index', compact('suppliers'));
     }
 
@@ -43,6 +47,9 @@ class SupplierController extends Controller
      */
     public function show(Supplier $supplier)
     {
+        if (auth()->user()->role != Role::ROLES[0] and $supplier->user_id != auth()->user()->id) {
+            abort(403, 'Action forbidden');
+        }
         return view('suppliers.show', compact('supplier'));
     }
 
@@ -51,6 +58,9 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
+        if (auth()->user()->role != Role::ROLES[0] and $supplier->user_id != auth()->user()->id) {
+            abort(403, 'Action forbidden');
+        }
         return view('suppliers.edit', compact('supplier'));
     }
 
@@ -69,6 +79,9 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
+        if (auth()->user()->role != Role::ROLES[0] and $supplier->user_id != auth()->user()->id) {
+            abort(403, 'Action forbidden');
+        }
         $supplier->delete();
         Alert::toast("Supplier removed successfully", 'success');
         return to_route('suppliers.index');

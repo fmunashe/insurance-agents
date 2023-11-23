@@ -45,7 +45,7 @@ class ProductController extends Controller
         $clients = Client::all();
         if (auth()->user()->role != Role::ROLES[0]) {
             $clients = Client::query()->where('user_id', '=', auth()->user()->id)->get();
-            $categories = $categories->where('user_id','=',auth()->user()->id)->collect();
+            $categories = $categories->where('user_id', '=', auth()->user()->id)->collect();
         }
         return view('products.create', compact('categories', 'clients'));
     }
@@ -75,7 +75,8 @@ class ProductController extends Controller
         $providers = Supplier::all();
         $categories = ProductCategory::all();
         if (auth()->user()->role != Role::ROLES[0]) {
-            $categories = $categories->where('user_id','=',auth()->user()->id)->collect();
+            $categories = $categories->where('user_id', '=', auth()->user()->id)->collect();
+            $providers = $providers->where('user_id', '=', auth()->user()->id)->collect();
         }
         return view('products.show', compact('product', 'currencies', 'providers', 'categories', 'bands'));
     }
@@ -90,7 +91,7 @@ class ProductController extends Controller
         }
         $categories = ProductCategory::all();
         if (auth()->user()->role != Role::ROLES[0]) {
-            $categories = $categories->where('user_id','=',auth()->user()->id)->collect();
+            $categories = $categories->where('user_id', '=', auth()->user()->id)->collect();
         }
         return view('products.edit', compact('product', 'categories'));
     }

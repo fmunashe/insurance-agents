@@ -32,8 +32,8 @@
                     <div class="card">
                         <div class="card-header bg-primary">
                             <h4 class="card-title text-white">All Providers </h4>
-                           <span> <a href="{{route('suppliers.create')}}" class="btn btn-primary">+ Add new</a>
-                            <a href="{{route('suppliers.report')}}" class="btn btn-primary">Export List</a>
+                            <span> <a href="{{route('suppliers.create')}}" class="btn btn-primary">+ Add new</a>
+                                    <a href="{{route('suppliers.report')}}" class="btn btn-primary">Export List</a>
                            </span>
                         </div>
                         <div class="card-body">
@@ -42,6 +42,7 @@
                                     <thead>
                                     <tr>
                                         <th></th>
+                                        <th>Agent</th>
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>Email</th>
@@ -53,6 +54,7 @@
                                     @foreach($suppliers as $supplier)
                                         <tr>
                                             <td>{{$supplier->id}}</td>
+                                            <td>{{$supplier->agent->name??""}} &nbsp;&nbsp;{{$supplier->agent->surname??""}}</td>
                                             <td>{{$supplier->name}}</td>
                                             <td>{{$supplier->phone}}</td>
                                             <td>{{$supplier->email}}</td>

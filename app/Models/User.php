@@ -61,4 +61,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(ProductCategory::class, 'user_id', 'id');
     }
+
+    public function providers(): HasMany
+    {
+        return $this->hasMany(Supplier::class, 'user_id', 'id');
+    }
 }

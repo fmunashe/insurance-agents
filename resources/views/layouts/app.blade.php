@@ -138,25 +138,23 @@
                             <li><a href="{{route('products.index')}}">Risks</a></li>
                         </ul>
                     </li>
-                @endif
 
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-paypal"></i>
-                        <span class="nav-text">Clients</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{route('clients.index')}}">Clients</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-paper-plane"></i>
-                        <span class="nav-text">Policies</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{route('policies')}}">Policies</a></li>
-                    </ul>
-                </li>
-                @if(auth()->user()->role == \App\Enum\Role::ROLES[0])
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-paypal"></i>
+                            <span class="nav-text">Clients</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('clients.index')}}">Clients</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-paper-plane"></i>
+                            <span class="nav-text">Policies</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('policies')}}">Policies</a></li>
+                        </ul>
+                    </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-money"></i>
                             <span class="nav-text">Insurance Providers</span>
@@ -167,16 +165,8 @@
                         </ul>
                     </li>
 
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="la la-users"></i>
-                            <span class="nav-text">Reports</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            {{--                            <li><a href="{{route('customers.index')}}">Customers</a></li>--}}
-                            {{--                            <li><a href="{{route('salesReport')}}">Sales</a></li>--}}
-                        </ul>
-                    </li>
                 @endif
+
 
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-cogs"></i>
@@ -189,8 +179,11 @@
                             <li><a href="{{route('getSubscriptionForm')}}">Subscriptions</a></li>
                             <li><a href="{{route('subscriptionPlan.index')}}">Subscription Plans</a></li>
                         @endif
-                        <li><a href="{{route('productCategories.index')}}">Risk Categories</a></li>
-                        <li><a href="{{route('commissions.index')}}">Commission Bands</a></li>
+
+                        @if(auth()->user()->role == \App\Enum\Role::ROLES[0] || auth()->user()->role == \App\Enum\Role::ROLES[2])
+                            <li><a href="{{route('productCategories.index')}}">Risk Categories</a></li>
+                            <li><a href="{{route('commissions.index')}}">Commission Bands</a></li>
+                        @endif
 
                     </ul>
                 </li>

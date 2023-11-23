@@ -36,6 +36,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
+                                <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                                 <div class="form-group">
                                     <label class="form-label">Name</label>
                                     <input type="text" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" name="name">
