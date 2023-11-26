@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\CurrencyController;
@@ -65,6 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::get('subscription', [HomeController::class, 'getSubscriptionForm'])->name('getSubscriptionForm');
     Route::post('subscribe', [HomeController::class, 'subscribe'])->name('service.subscription');
     Route::resource('subscriptionPlan', SubscriptionPlanController::class);
+    Route::resource('adverts', AdvertController::class);
 
 });
 

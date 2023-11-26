@@ -178,6 +178,7 @@
                             <li><a href="{{route('users.index')}}">Users</a></li>
                             <li><a href="{{route('getSubscriptionForm')}}">Subscriptions</a></li>
                             <li><a href="{{route('subscriptionPlan.index')}}">Subscription Plans</a></li>
+                            <li><a href="{{route('adverts.index')}}">Adverts</a></li>
                         @endif
 
                         @if(auth()->user()->role == \App\Enum\Role::ROLES[0] || auth()->user()->role == \App\Enum\Role::ROLES[2])
@@ -200,6 +201,45 @@
     <div class="content-body">
         <!-- row -->
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <h4 class="card-intro-title mb-4">Adverts</h4>
+                            <div class="bootstrap-carousel">
+                                <div data-ride="carousel" class="carousel slide" id="carouselExampleCaptions">
+                                    <ol class="carousel-indicators">
+                                        @foreach(\App\Models\Advert::query()->where('status',true)->latest()->get() as $advert)
+                                            <li class="{{ $loop->first ? 'active' : '' }}"
+                                                data-slide-to="{{$loop->index}}" data-target="#carouselExampleCaptions">
+                                            </li>
+                                        @endforeach
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        @foreach(\App\Models\Advert::query()->where('status',true)->latest()->get() as $advert)
+                                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                <img class="d-block w-100"
+                                                     src="{{ Storage::url('uploads/'.$advert->banner_url) }}" alt=""
+                                                     style="height: 300px;width: 400px">
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h5>{{$advert->title}}</h5>
+                                                    <p>{{$advert->description}}</p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <a data-slide="prev" href="#carouselExampleCaptions"
+                                       class="carousel-control-prev"><span class="carousel-control-prev-icon"></span>
+                                        <span class="sr-only">Previous</span></a>
+                                    <a data-slide="next" href="#carouselExampleCaptions"
+                                       class="carousel-control-next"><span class="carousel-control-next-icon"></span>
+                                        <span class="sr-only">Next</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @yield('content')
         </div>
     </div>
