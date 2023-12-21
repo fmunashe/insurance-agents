@@ -220,7 +220,7 @@
                                             <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                                 <img class="d-block w-100"
                                                      src="{{ Storage::url('uploads/'.$advert->banner_url) }}" alt=""
-                                                     style="height: 300px;width: 400px">
+                                                    style="height: 250px" >
                                                 <div class="carousel-caption d-none d-md-block">
                                                     <h5>{{$advert->title}}</h5>
                                                     <p>{{$advert->description}}</p>
