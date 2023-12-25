@@ -39,9 +39,14 @@
                                     <thead>
                                     <tr>
                                         <th></th>
+                                        <th>Tag</th>
                                         <th>Plan Name</th>
-                                        <th>Amount</th>
-                                        <th>Stripe Key</th>
+                                        <th>Price</th>
+                                        <th>Description</th>
+                                        <th>Is Active</th>
+                                        <th>Currency</th>
+                                        <th>Trial Period</th>
+                                        <th>Trial Interval</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -49,10 +54,18 @@
                                     @foreach($plans as $plan)
                                         <tr>
                                             <td>{{$plan->id}}</td>
+                                            <td>{{$plan->tag}}</td>
                                             <td>{{$plan->name}}</td>
-                                            <td>{{number_format($plan->amount,2)}}</td>
-                                            <td>{{$plan->stripe_key}}</td>
+                                            <td>{{number_format($plan->price,2)}}</td>
+                                            <td>{{$plan->description}}</td>
+                                            <td><span class="badge {{$plan->is_active?"badge-success":"badge-danger"}}">{{$plan->is_active?"Yes":"No"}}</span></td>
+                                            <td>{{$plan->currency}}</td>
+                                            <td>{{$plan->trial_period}}</td>
+                                            <td>{{$plan->trial_interval}}</td>
                                             <td>
+                                                <a href="{{route('subscriptionPlan.show',$plan->id)}}"
+                                                   class="btn btn-sm btn-info"><i
+                                                        class="la la-eye"></i></a>
                                                 <a href="{{route('subscriptionPlan.edit',$plan->id)}}"
                                                    class="btn btn-sm btn-success"><i
                                                         class="la la-pencil"></i></a>

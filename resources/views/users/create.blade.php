@@ -83,6 +83,21 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Subscription Plan</label>
+                                    <select  value="{{old('plan')}}" class="form-control @error('plan') is-invalid @enderror" name="plan">
+                                      @foreach($plans as $plan)
+                                        <option value="{{$plan}}" >{{$plan->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('plan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                                 <a href="{{route('users.index')}}" class="btn btn-danger">Cancel</a>

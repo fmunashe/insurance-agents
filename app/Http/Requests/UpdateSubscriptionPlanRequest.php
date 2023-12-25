@@ -22,9 +22,13 @@ class UpdateSubscriptionPlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'amount' => 'required',
-            'stripe_key' => 'required'
+            'name'=>'required',
+            'price'=>'required',
+            'tag'=>'required',
+            'description'=>'required',
+            'currency'=>'required',
+            'trial_period'=>'required',
+            'trial_interval'=>'required',
         ];
     }
 }

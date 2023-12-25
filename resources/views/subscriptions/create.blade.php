@@ -32,8 +32,7 @@
                     <h5 class="card-title text-white">Subscription Details</h5>
                 </div>
                 <div class="card-body">
-                    <form id="payment-form" data-secret="{{ $intent->client_secret }}"
-                          action="{{route('service.subscription')}}" method="post">
+                    <form action="{{route('service.subscription')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
@@ -57,34 +56,22 @@
                                                             @foreach($plans as $plan)
                                                                 <label class="radio-inline col-lg-3">
                                                                     <input type="radio" name="package"
-                                                                           value="{{$plan->stripe_key}}">
+                                                                           value="{{$plan}}">
                                                                     <p>{{$plan->name}}</p>
                                                                     <p class="price">
-                                                                        ${{number_format($plan->amount)}}</p></label>
+                                                                        {{$plan->currency}}
+                                                                        &nbsp;{{number_format($plan->price)}}</p>
+                                                                </label>
                                                             @endforeach
-
                                                         </div>
+{{--                                                        <div class="form-group row">--}}
+{{--                                                            <a href='https://www.paynow.co.zw/Payment/Link/?q=c2VhcmNoPXppaG92ZW0lNDBnbWFpbC5jb20mYW1vdW50PTYwMC4wMCZyZWZlcmVuY2U9U2VydmljZStTdWJzY3JpcHRpb24mbD0x' target='_blank'><img src='https://www.paynow.co.zw/Content/Buttons/Medium_buttons/button_pay-now_medium.png' style='border:0' /></a>--}}
+{{--                                                        </div>--}}
                                                     </div>
 
                                                 </div>
 
                                                 <div class="row">
-                                                    <div class="col-lg-4 col-md-4 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label class="form-label">Card Holder Name</label>
-                                                            <input id="card-holder-name" type="text"
-                                                                   value="{{old('name')}}"
-                                                                   class="form-control @error('name') is-invalid @enderror"
-                                                                   name="name">
-                                                            @error('name')
-                                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <!-- Stripe Elements Placeholder -->
-                                                    <div class="col-md-8 p-4" id="card-element"></div>
 
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <button type="submit" class="btn btn-primary" id="card-button">
@@ -109,52 +96,5 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="https://js.stripe.com/v3/"></script>
-
-        <script>
-            const stripeKey = '{{ env('STRIPE_KEY') }}';
-            const stripe = Stripe(stripeKey);
-
-            const elements = stripe.elements();
-            const cardElement = elements.create('card');
-
-            cardElement.mount('#card-element');
-
-            const form = document.getElementById('payment-form')
-            const cardButton = document.getElementById('card-button')
-            const cardHolderName = document.getElementById('card-holder-name');
-            const clientSecret = form.dataset.secret;
-
-            form.addEventListener('submit', async (event) => {
-                event.preventDefault();
-
-                const {setupIntent, error} = await stripe.confirmCardSetup(
-                    clientSecret, {
-                        payment_method: {
-                            card: cardElement,
-                            billing_details: {name: cardHolderName.value}
-                        }
-                    }
-                );
-
-                if (error) {
-                    console.log(error.message);
-                } else {
-                    // The card has been verified successfully...
-                    stripeTokenHandler(setupIntent);
-                }
-            });
-
-            function stripeTokenHandler(setupIntent) {
-                const hiddenInput = document.createElement('input');
-                hiddenInput.setAttribute('type', 'hidden');
-                hiddenInput.setAttribute('name', 'stripeToken');
-                hiddenInput.setAttribute('value', setupIntent.payment_method);
-                form.appendChild(hiddenInput);
-                form.submit();
-            }
-        </script>
-    @endpush
 @endsection
 

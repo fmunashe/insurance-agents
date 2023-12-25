@@ -28,12 +28,16 @@
                             <td>{{$plan->name}}</td>
                         </tr>
                         <tr>
-                            <td>Amount</td>
-                            <td>{{number_format($plan->amount,2)}}</td>
+                            <td>Price</td>
+                            <td>{{number_format($plan->price,2)}}</td>
                         </tr>
                         <tr>
-                            <td>Stripe Key</td>
-                            <td>{{$plan->stripe_key}}</td>
+                            <td>Description</td>
+                            <td>{{$plan->description}}</td>
+                        </tr>
+                        <tr>
+                            <td>Currency</td>
+                            <td>{{$plan->currency}}</td>
                         </tr>
                     </table>
                 </div>

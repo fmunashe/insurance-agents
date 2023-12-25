@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubscriptionPlanRequest;
 use App\Http\Requests\UpdateSubscriptionPlanRequest;
-use App\Models\SubscriptionPlan;
+use App\Models\Currency;
+use Bpuig\Subby\Models\Plan;
 
 class SubscriptionPlanController extends Controller
 {
@@ -13,10 +14,7 @@ class SubscriptionPlanController extends Controller
      */
     public function index()
     {
-//        $user = auth()->user();
-//        dd($user->onTrial('Service-Subscription'));
-//        dd($user->subscribed('Service-Subscription'));
-        $plans = SubscriptionPlan::all();
+        $plans = Plan::all();
         return view('subscriptions.index', compact('plans'));
     }
 
@@ -25,7 +23,8 @@ class SubscriptionPlanController extends Controller
      */
     public function create()
     {
-        return view('subscriptions.create-plan');
+        $currencies = Currency::all();
+        return view('subscriptions.create-plan',compact('currencies'));
     }
 
     /**
@@ -33,7 +32,7 @@ class SubscriptionPlanController extends Controller
      */
     public function store(StoreSubscriptionPlanRequest $request)
     {
-        SubscriptionPlan::query()->create($request->all());
+        Plan::query()->create($request->all());
         toast('Plan Successfully Added', 'success');
         return to_route('subscriptionPlan.index');
     }
@@ -41,23 +40,24 @@ class SubscriptionPlanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SubscriptionPlan $subscriptionPlan)
+    public function show(Plan $subscriptionPlan)
     {
-        //
+        dd($subscriptionPlan);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubscriptionPlan $subscriptionPlan)
+    public function edit(Plan $subscriptionPlan)
     {
-        return view('subscriptions.edit-plan', compact('subscriptionPlan'));
+        $currencies = Currency::all();
+        return view('subscriptions.edit-plan', compact('subscriptionPlan','currencies'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubscriptionPlanRequest $request, SubscriptionPlan $subscriptionPlan)
+    public function update(UpdateSubscriptionPlanRequest $request, Plan $subscriptionPlan)
     {
         $subscriptionPlan->update($request->all());
         toast('Plan Successfully Updated', 'success');
@@ -67,7 +67,7 @@ class SubscriptionPlanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubscriptionPlan $subscriptionPlan)
+    public function destroy(Plan $subscriptionPlan)
     {
         $subscriptionPlan->delete();
         toast('Plan Successfully Removed', 'success');

@@ -38,7 +38,19 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">Plan Name</label>
+                                    <label class="form-label">Tag (should be called main)</label>
+                                    <input type="text" value="{{old('tag')}}"
+                                           class="form-control @error('tag') is-invalid @enderror" name="tag">
+                                    @error('tag')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Plan Name (should be called main)</label>
                                     <input type="text" value="{{old('name')}}"
                                            class="form-control @error('name') is-invalid @enderror" name="name">
                                     @error('name')
@@ -50,10 +62,64 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">Amount</label>
-                                    <input type="number" min="0" step="0.1" value="{{old('amount')}}"
-                                           class="form-control @error('amount') is-invalid @enderror" name="amount">
-                                    @error('amount')
+                                    <label class="form-label">Description</label>
+                                    <input type="text" value="{{old('description')}}"
+                                           class="form-control @error('description') is-invalid @enderror" name="description">
+                                    @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Price</label>
+                                    <input type="number" min="0" step="0.1" value="{{old('price')}}"
+                                           class="form-control @error('price') is-invalid @enderror" name="price">
+                                    @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Trial Period</label>
+                                    <input type="number" min="0" step="0.1" value="{{old('trial_period')}}"
+                                           class="form-control @error('trial_period') is-invalid @enderror" name="trial_period">
+                                    @error('trial_period')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Trial Interval</label>
+                                    <select class="form-control @error('trial_interval') is-invalid @enderror" name="trial_interval">
+                                    <option value="day">Days</option>
+                                    <option value="month">Months</option>
+                                    <option value="year">Years</option>
+                                    </select>
+                                    @error('trial_interval')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Currency</label>
+                                    <select class="form-control @error('currency') is-invalid @enderror" name="currency">
+                                        @foreach($currencies as $currency)
+                                    <option value="{{$currency->name}}">{{$currency->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('currency')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -61,19 +127,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label class="form-label">Stripe Product Key</label>
-                                    <input type="text" value="{{old('stripe_key')}}"
-                                           class="form-control @error('stripe_key') is-invalid @enderror"
-                                           name="stripe_key">
-                                    @error('stripe_key')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                                 <a href="{{route('subscriptionPlan.index')}}" class="btn btn-danger">Cancel</a>

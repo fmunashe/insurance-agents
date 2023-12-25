@@ -23,8 +23,12 @@ class StoreSubscriptionPlanRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'amount'=>'required',
-            'stripe_key'=>'required'
+            'price'=>'required',
+            'tag'=>'required',
+            'description'=>'required',
+            'currency'=>'required',
+            'trial_period'=>'required',
+            'trial_interval'=>'required',
         ];
     }
 }

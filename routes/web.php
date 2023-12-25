@@ -32,9 +32,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware(['auth', 'verified','subscription'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','subscription'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -63,11 +63,14 @@ Route::middleware('auth')->group(function () {
     Route::get('showPolicy/{policy}', [InsuredController::class, 'showPolicy'])->name('showPolicy');
     Route::resource('insurance', InsuredController::class);
     Route::resource('commissions', CommissionController::class);
-    Route::get('subscription', [HomeController::class, 'getSubscriptionForm'])->name('getSubscriptionForm');
     Route::post('subscribe', [HomeController::class, 'subscribe'])->name('service.subscription');
     Route::resource('subscriptionPlan', SubscriptionPlanController::class);
     Route::resource('adverts', AdvertController::class);
 
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('subscription', [HomeController::class, 'getSubscriptionForm'])->name('getSubscriptionForm');
 });
 
 require __DIR__ . '/auth.php';

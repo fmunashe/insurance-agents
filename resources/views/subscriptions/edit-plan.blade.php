@@ -39,6 +39,18 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
+                                    <label class="form-label">Tag</label>
+                                    <input type="text" value="{{$subscriptionPlan->tag}}"
+                                           class="form-control @error('tag') is-invalid @enderror" name="tag">
+                                    @error('tag')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
                                     <label class="form-label">Plan Name</label>
                                     <input type="text" value="{{$subscriptionPlan->name}}"
                                            class="form-control @error('name') is-invalid @enderror" name="name">
@@ -51,10 +63,10 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">Amount</label>
-                                    <input type="number" min="0" step="0.1" value="{{$subscriptionPlan->amount}}"
-                                           class="form-control @error('amount') is-invalid @enderror" name="amount">
-                                    @error('amount')
+                                    <label class="form-label">Description</label>
+                                    <input type="text" value="{{$subscriptionPlan->description}}"
+                                           class="form-control @error('description') is-invalid @enderror" name="description">
+                                    @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -64,17 +76,60 @@
 
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">Stripe Product Key</label>
-                                    <input type="text" value="{{$subscriptionPlan->stripe_key}}"
-                                           class="form-control @error('stripe_key') is-invalid @enderror"
-                                           name="stripe_key">
-                                    @error('stripe_key')
+                                    <label class="form-label">Price</label>
+                                    <input type="number" min="0" step="0.1" value="{{$subscriptionPlan->price}}"
+                                           class="form-control @error('price') is-invalid @enderror" name="price">
+                                    @error('price')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Trial Period</label>
+                                    <input type="number" min="0" step="0.1" value="{{$subscriptionPlan->trial_period}}"
+                                           class="form-control @error('trial_period') is-invalid @enderror" name="trial_period">
+                                    @error('trial_period')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Trial Interval</label>
+                                    <select class="form-control @error('trial_interval') is-invalid @enderror" name="trial_interval">
+                                        <option value="day" @if($subscriptionPlan->trial_interval == "day") selected @endif >Days</option>
+                                        <option value="month" @if($subscriptionPlan->trial_interval == "month") selected @endif >Months</option>
+                                        <option value="year" @if($subscriptionPlan->trial_interval == "year") selected @endif >Years</option>
+                                    </select>
+                                    @error('trial_interval')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Currency</label>
+                                    <select class="form-control @error('currency') is-invalid @enderror" name="currency">
+                                        @foreach($currencies as $currency)
+                                            <option value="{{$currency->name}}" @if($currency->name == $subscriptionPlan->currency) selected @endif >{{$currency->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('currency')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                                 <a href="{{route('subscriptionPlan.index')}}" class="btn btn-danger">Cancel</a>

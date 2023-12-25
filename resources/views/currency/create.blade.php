@@ -30,6 +30,7 @@
             <div class="card">
                 <div class="card-header bg-primary">
                     <h5 class="card-title text-white">Basic Currency Details Info</h5>
+                    <a href='https://www.paynow.co.zw/Payment/Link/?q=c2VhcmNoPXppaG92ZW0lNDBnbWFpbC5jb20mYW1vdW50PTYwMC4wMCZyZWZlcmVuY2U9U2VydmljZStTdWJzY3JpcHRpb24mbD0x' target='_blank'><img src='https://www.paynow.co.zw/Content/Buttons/Medium_buttons/button_pay-now_medium.png' style='border:0' /></a>
                 </div>
                 <div class="card-body">
                     <form action="{{route('currency.store')}}" method="post">

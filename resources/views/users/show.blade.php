@@ -63,33 +63,42 @@
     </div>
     <div class="col-xl-9 col-xxl-8 col-lg-8">
         <div class="card">
-{{--            <div class="card-body">--}}
-{{--                        <div class="table-responsive recentOrderTable">--}}
-{{--                            <table class="table verticle-middle table-responsive-md">--}}
-{{--                                <thead class="bg-primary text-white">--}}
-{{--                                <tr>--}}
-{{--                                    <th scope="col">Date</th>--}}
-{{--                                    <th scope="col">Company</th>--}}
-{{--                                    <th scope="col" class="text-nowrap">Contact Person</th>--}}
-{{--                                    <th scope="col">Phone</th>--}}
-{{--                                    <th scope="col">Notes</th>--}}
-{{--                                </tr>--}}
-{{--                                </thead>--}}
-{{--                                <tbody>--}}
-{{--                                @foreach($user->callSummary as $summary)--}}
-{{--                                    <tr>--}}
-{{--                                        <td class="text-nowrap">{{$summary->date}}</td>--}}
-{{--                                        <td>{{$summary->company}}</td>--}}
-{{--                                        <td>{{$summary->contact_person}}</td>--}}
-{{--                                        <td>{{$summary->phone_number}}</td>--}}
-{{--                                        <td>{{$summary->notes}}</td>--}}
-{{--                                    </tr>--}}
-{{--                                @endforeach--}}
-{{--                                </tbody>--}}
-{{--                            </table>--}}
-{{--                        </div>--}}
+            <div class="card-header">
+                <h4 class="card-title">Subscription</h4>
+            </div>
+            <div class="card-body">
+                        <div class="table-responsive recentOrderTable">
+                            <table class="table verticle-middle table-responsive-md">
+                                <thead class="bg-primary text-white">
+                                <tr>
+                                    <th scope="col">Tag</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col" class="text-nowrap">Description</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Currency</th>
+                                    <th scope="col">Trial Period</th>
+                                    <th scope="col">Trial Interval</th>
+                                    <th scope="col">Trial Ends At</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($user->activeSubscriptions() as $subscription)
+                                    <tr>
+                                        <td>{{$subscription->tag}}</td>
+                                        <td>{{$subscription->name}}</td>
+                                        <td>{{$subscription->description}}</td>
+                                        <td>{{$subscription->price}}</td>
+                                        <td>{{$subscription->currency}}</td>
+                                        <td>{{$subscription->trial_period}}</td>
+                                        <td>{{$subscription->trial_interval}}</td>
+                                        <td>{{$subscription->trial_ends_at}}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
 
-{{--            </div>--}}
+            </div>
         </div>
     </div>
 </div>

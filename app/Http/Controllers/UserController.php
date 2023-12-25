@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Bpuig\Subby\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -21,13 +22,26 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        $plans = Plan::all();
+        return view('users.create',compact('plans'));
     }
 
 
     public function store(StoreUserRequest $request)
     {
-        User::query()->create($request->all());
+        $plan = json_decode($request->plan);
+        $plan = Plan::find($plan->id);
+
+        $user = User::query()->create($request->all());
+
+        $user->newSubscription(
+            $plan->tag, // identifier tag of the subscription. If your application offers a single subscription, you might call this 'main' or 'primary'
+            $plan, // Plan or PlanCombination instance your subscriber is subscribing to
+            $plan->name, // Human-readable name for your subscription
+            $plan->description, // Description
+            null, // Start date for the subscription, defaults to now()
+            'free'// Payment method service defined in config
+        );
         Alert::toast('User Successfully Created', 'success');
         return to_route('users.index');
     }
@@ -41,7 +55,8 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $plans = Plan::all();
+        return view('users.edit', compact('user','plans'));
     }
 
 
