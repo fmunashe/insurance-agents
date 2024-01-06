@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Enum\Role;
+use App\Exports\PolicyExport;
 use App\Http\Requests\StoreInsuredRequest;
 use App\Http\Requests\UpdateInsuredRequest;
 use App\Models\Commission;
 use App\Models\Insured;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class InsuredController extends Controller
@@ -110,5 +112,10 @@ class InsuredController extends Controller
     public function showPolicy(Insured $policy): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('policy.show', compact('policy'));
+    }
+
+    public function PolicyReport(): \Symfony\Component\HttpFoundation\BinaryFileResponse
+    {
+        return Excel::download(new PolicyExport, 'InsurancePolicyList.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

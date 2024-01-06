@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enum\Role;
+use App\Exports\ClientsExport;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
@@ -11,6 +12,7 @@ use App\Models\Currency;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Supplier;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ClientController extends Controller
@@ -62,7 +64,7 @@ class ClientController extends Controller
         $categories = ProductCategory::all();
         $products = Product::query()->where('client_id', $client->id)->get();
         if (auth()->user()->role != Role::ROLES[0]) {
-            $categories = $categories->where('user_id','=',auth()->user()->id)->collect();
+            $categories = $categories->where('user_id', '=', auth()->user()->id)->collect();
             $providers = $providers->where('user_id', '=', auth()->user()->id)->collect();
         }
 
@@ -101,5 +103,10 @@ class ClientController extends Controller
         $client->delete();
         Alert::toast('Client Successfully removed', 'success');
         return to_route('clients.index');
+    }
+
+    public function ClientsReport(): \Symfony\Component\HttpFoundation\BinaryFileResponse
+    {
+        return Excel::download(new ClientsExport, 'ClientsList.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

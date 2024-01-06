@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Commission extends Model
 {
@@ -25,4 +26,10 @@ class Commission extends Model
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
     }
+    public function insured(): HasMany
+    {
+        return $this->hasMany(Insured::class, 'commission_id', 'id');
+    }
+
+
 }

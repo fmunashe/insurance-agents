@@ -31,6 +31,9 @@
                     <div class="card">
                         <div class="card-header bg-primary">
                             <h4 class="card-title text-white">All Policies </h4>
+                            <span>
+                                <a href="{{route('policy.report')}}" class="btn btn-primary">Export List</a>
+                           </span>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

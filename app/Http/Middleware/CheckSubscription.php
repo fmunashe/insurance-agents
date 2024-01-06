@@ -20,8 +20,10 @@ class CheckSubscription
         $plan = Plan::query()->latest()->first();
         $user = auth()->user();
         if ($user AND $user->role != Role::ROLES[0]) {
-            if (!$user->subscription($plan->tag)->isOnTrial() AND $user->paid == 0) {
-                return to_route('getSubscriptionForm');
+            if(!$user->email == "agent@warmsure.co.zw" OR !$user->email == "shix@warmsure.co.zw") {
+                if (!$user->subscription($plan->tag)->isOnTrial() and $user->paid == 0) {
+                    return to_route('getSubscriptionForm');
+                }
             }
         }
 

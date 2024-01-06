@@ -40,6 +40,8 @@ Route::middleware(['auth','subscription'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/users', UserController::class);
+
+    Route::get("/riskReport",[ProductController::class,'RiskReport'])->name('risk.report');
     Route::resource('/products', ProductController::class);
     Route::resource('/currency', CurrencyController::class);
     Route::resource('/customers', CustomerController::class);
@@ -58,7 +60,10 @@ Route::middleware(['auth','subscription'])->group(function () {
     Route::get('/suppliers/export', [SupplierController::class, 'report'])->name('suppliers.report');
     Route::resource('/suppliers', SupplierController::class);
 
+    Route::get("/clientsReport",[ClientController::class,'ClientsReport'])->name('clients.report');
     Route::resource('clients', ClientController::class);
+
+    Route::get("/policiesReport",[InsuredController::class,'PolicyReport'])->name('policy.report');
     Route::get('policies', [InsuredController::class, 'getPolicies'])->name('policies');
     Route::get('showPolicy/{policy}', [InsuredController::class, 'showPolicy'])->name('showPolicy');
     Route::resource('insurance', InsuredController::class);

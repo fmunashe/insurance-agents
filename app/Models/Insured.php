@@ -42,5 +42,10 @@ class Insured extends Model
         return $this->belongsTo(Currency::class);
     }
 
+    public function commission(): BelongsTo
+    {
+        return $this->belongsTo(Commission::class, 'commission_id', 'id');
+    }
+
 
 }

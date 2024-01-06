@@ -31,7 +31,9 @@
                     <div class="card">
                         <div class="card-header bg-primary">
                             <h4 class="card-title text-white">All Clients </h4>
-                            <a href="{{route('clients.create')}}" class="btn btn-primary">+ Add new</a>
+                            <span> <a href="{{route('clients.create')}}" class="btn btn-primary">+ Add new</a>
+                                    <a href="{{route('clients.report')}}" class="btn btn-primary">Export List</a>
+                           </span>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

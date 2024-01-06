@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enum\Role;
+use App\Exports\RisksExport;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Client;
@@ -11,6 +12,7 @@ use App\Models\Currency;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Supplier;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
@@ -117,5 +119,10 @@ class ProductController extends Controller
         $product->delete();
         Alert::toast('Product Successfully Removed', 'success');
         return to_route('products.index');
+    }
+
+    public function RiskReport(): \Symfony\Component\HttpFoundation\BinaryFileResponse
+    {
+        return Excel::download(new RisksExport, 'RisksList.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }
