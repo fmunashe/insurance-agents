@@ -30,6 +30,7 @@ class RisksExport implements FromCollection, WithMapping, WithHeadings, ShouldAu
     public function map($product): array
     {
         return [
+            $product->client->agent->name??"",
             $product->category->name ?? "",
             $product->name ?? "",
             $product->description ?? "",
@@ -42,7 +43,7 @@ class RisksExport implements FromCollection, WithMapping, WithHeadings, ShouldAu
     public function headings(): array
     {
         return [
-            ['Risk Category', 'Risk Name', 'Risk Description','Client Full Name', 'Client Mobile', 'Client Email'],
+            ['Agent','Risk Category', 'Risk Name', 'Risk Description','Client Full Name', 'Client Mobile', 'Client Email'],
         ];
     }
 }
