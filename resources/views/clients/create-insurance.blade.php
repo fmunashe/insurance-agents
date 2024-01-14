@@ -97,6 +97,30 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
+                                <label class="form-label">Stamp Duty</label>
+                                <input type="number" step="0.1" min="0" value="{{old('stamp_duty')}}"
+                                       class="form-control @error('stamp_duty') is-invalid @enderror" name="stamp_duty">
+                                @error('stamp_duty')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label class="form-label">Levy</label>
+                                <input type="number" step="0.1" min="0" value="{{old('levy')}}"
+                                       class="form-control @error('levy') is-invalid @enderror" name="levy">
+                                @error('levy')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
                                 <label class="form-label">Policy Number</label>
                                 <input type="text" value="{{old('policy_number')}}"
                                        class="form-control @error('policy_number') is-invalid @enderror"
@@ -195,7 +219,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
                                 <label class="form-label">Policy Schedule Document</label>
                                 <input type="file" class="form-control @error('policy_schedule') is-invalid @enderror"
