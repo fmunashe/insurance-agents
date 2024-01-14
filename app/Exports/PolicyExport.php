@@ -38,6 +38,9 @@ class PolicyExport implements FromCollection, WithMapping, WithHeadings, ShouldA
             $policy->policy_number,
             $policy->sum_insured,
             $policy->premium,
+            $policy->stamp_duty,
+            $policy->levy,
+            $policy->total_premium,
             $policy->number_of_terms,
             Carbon::parse($policy->start_date)->format('d-m-Y'),
             Carbon::parse($policy->end_date)->format('d-m-Y'),
@@ -53,7 +56,7 @@ class PolicyExport implements FromCollection, WithMapping, WithHeadings, ShouldA
     {
         return [
             ['Risk Name', 'Risk Category', 'Client Full Name', 'Client Mobile', 'Client Email', 'Insurance Provider',
-                'Policy Number', 'Sum Insured', 'Premium', 'Number Of Terms', 'Start Date', 'End Date', 'Status', 'Currency',
+                'Policy Number', 'Sum Insured', 'Risk Premium','Stamp Duty','Levy','Total Premium', 'Number Of Terms', 'Start Date', 'End Date', 'Status', 'Currency',
                 'Commission Band', 'Commission Percentage', 'Commission Amount'],
         ];
     }

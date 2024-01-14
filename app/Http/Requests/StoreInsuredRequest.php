@@ -33,7 +33,9 @@ class StoreInsuredRequest extends FormRequest
             'end_date' => ['required', 'date', 'after:start_date'],
             'status' => ['required'],
             'number_of_terms' => ['required'],
-            'policy_schedule' => 'nullable|mimes:docx,pdf,png,jpeg,jpg'
+            'policy_schedule' => 'nullable|mimes:docx,pdf,png,jpeg,jpg',
+            'stamp_duty'=>['required'],
+            'levy'=>['required'],
         ];
     }
 }

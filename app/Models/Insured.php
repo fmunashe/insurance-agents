@@ -24,7 +24,10 @@ class Insured extends Model
         'rate',
         'policy_schedule_link',
         'commission_id',
-        'commission_amount'
+        'commission_amount',
+        'stamp_duty',
+        'levy',
+        'total_premium',
     ];
 
     public function product(): BelongsTo

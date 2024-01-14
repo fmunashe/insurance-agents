@@ -51,13 +51,13 @@
                                             <td>
                                                 <a href="{{route('productCategories.show',$category->id)}}"
                                                    class="btn btn-sm btn-success"><i
-                                                        class="la la-eye"></i></a>
+                                                        class="la la-eye"></i> View</a>
                                                 <a href="{{route('productCategories.edit',$category->id)}}"
                                                    class="btn btn-sm btn-primary"><i
-                                                        class="la la-pencil"></i></a>
+                                                        class="la la-pencil"></i> Edit</a>
                                                 <a href="#" class="btn btn-sm btn-danger" data-toggle="modal"
                                                    data-target="#confirmModal_{{$category->id}}"><i
-                                                        class="la la-trash-o"></i></a>
+                                                        class="la la-trash-o"></i> Delete</a>
                                                 @include('productCategories.confirm')
                                             </td>
                                         </tr>

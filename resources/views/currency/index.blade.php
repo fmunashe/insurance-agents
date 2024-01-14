@@ -53,13 +53,13 @@
                                             <td>
                                                 <a href="{{route('currency.show',$currency->id)}}"
                                                    class="btn btn-sm btn-success"><i
-                                                        class="la la-eye"></i></a>
+                                                        class="la la-eye"></i> View</a>
                                                 <a href="{{route('currency.edit',$currency->id)}}"
                                                    class="btn btn-sm btn-primary"><i
-                                                        class="la la-pencil"></i></a>
+                                                        class="la la-pencil"></i> Edit</a>
                                                 <a href="#" class="btn btn-sm btn-danger" data-toggle="modal"
                                                    data-target="#confirmModal_{{$currency->id}}"><i
-                                                        class="la la-trash-o"></i></a>
+                                                        class="la la-trash-o"></i> Delete</a>
                                                 @include('currency.confirm')
                                             </td>
                                         </tr>

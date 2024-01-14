@@ -8,7 +8,9 @@ use App\Http\Requests\StoreInsuredRequest;
 use App\Http\Requests\UpdateInsuredRequest;
 use App\Models\Commission;
 use App\Models\Insured;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -33,10 +35,53 @@ class InsuredController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInsuredRequest $request)
+    public function store(Request $request)
     {
 
         $data = $request->all();
+        $validator = Validator::make($data, [
+            'product_id' => ['required', 'exists:products,id'],
+            'sum_insured' => ['required', 'numeric'],
+            'premium' => ['required', 'numeric'],
+            'rate' => ['required', 'numeric'],
+            'policy_number' => ['required'],
+            'supplier_id' => ['required'],
+            'currency_id' => ['required'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:start_date'],
+            'status' => ['required'],
+            'number_of_terms' => ['required'],
+            'policy_schedule' => 'nullable|mimes:docx,pdf,png,jpeg,jpg',
+            'stamp_duty' => ['required'],
+            'levy' => ['required'],
+            'commission_id' => ['required'],
+        ],
+            [
+            'commission_id.required'=>"Commission band is required",
+            'product_id.required'=>"Risk is required",
+            'sum_insured.required'=>"Sum insured is required",
+            'premium.required'=>"Risk premium is required",
+            'rate.required'=>" Rate is required",
+            'policy_number.required'=>" Policy number is required",
+            'supplier_id.required'=>" Insurance provider is required",
+            'currency_id.required'=>" Currency is required",
+            'start_date.required'=>" Insurance start period is required",
+            'end_date.required'=>" Insurance end period is required",
+            'number_of_terms.required'=>"Insured number of terms is required",
+            'stamp_duty.required'=>"Stamp duty is required",
+            'levy.required'=>"Levy is required",
+        ]);
+
+        if ($validator->fails()) {
+            $errors = "<ol>";
+            foreach ($validator->errors()->all() as $error) {
+                $errors .="<li>".$error."</li>";
+            }
+            $errors .= "</ol>";
+            Alert::html("Correct These Errors",$errors)->autoClose(false);
+            return back();
+        }
+
         if (isset($data['policy_schedule'])) {
             $fileName = time() . '_' . $data['policy_number'] . '_' . $data['policy_schedule']->getClientOriginalName();
             $data['policy_schedule']->storeAs('uploads', $fileName, 'public');
@@ -46,7 +91,7 @@ class InsuredController extends Controller
 
         $commission = Commission::query()->where('id', '=', $data['commission_id'])->first();
         $data['commission_amount'] = $data['premium'] * ($commission->commission_percentage / 100);
-
+        $data['total_premium'] = $data['premium'] + $data['stamp_duty'] + $data['levy'];
 
         Insured::query()->create($data);
         Alert::toast('Insurance Successfully Attached', 'success');
