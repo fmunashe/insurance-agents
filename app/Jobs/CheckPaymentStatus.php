@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -29,6 +30,7 @@ class CheckPaymentStatus implements ShouldQueue
      */
     public function handle(): void
     {
+        Log::info(" ========= running the command started =======".Carbon::now());
         $users = User::query()->where('paid', '=', '0')
             ->whereNotNull('pollUrl')
             ->get();
@@ -48,5 +50,6 @@ class CheckPaymentStatus implements ShouldQueue
                 ]);
             }
         }
+        Log::info(" ========= running the command completed =======".Carbon::now());
     }
 }
